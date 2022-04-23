@@ -26,6 +26,9 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "moment": "^2.29.3",
+        "vue-spinner": "^1.0.4",
+        "vuejs-datepicker": "^1.6.2",
         "vuetify": "^2.6.4",
         "vuetify-loader": "^1.7.3"
     }

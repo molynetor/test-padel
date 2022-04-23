@@ -21,6 +21,7 @@ import Vuetify from "../plugins/vuetify";
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('find-pista', require('./components/FindPista.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -28,7 +29,23 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    vuetify: Vuetify,
-    el: '#app',
-});
+
+ 
+ /**
+  * Next, we will create a fresh Vue application instance and attach it to
+  * the page. Then, you may begin adding components to this application
+  * or customize the JavaScript scaffolding to fit your unique needs.
+  */
+ 
+ const app = new Vue({
+     vuetify: Vuetify,
+     el: '#app',
+ });
+ import moment from 'moment';
+import Vue from "vue";
+ 
+ Vue.filter('formatDate', function(value) {
+     if (value) {
+         return moment(String(value)).format('DD-MM-YYYY')
+     }
+ });
