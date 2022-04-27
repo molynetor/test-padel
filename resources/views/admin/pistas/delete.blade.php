@@ -45,7 +45,7 @@
 			
             <div class="card-footer">
                 <button type="submit" class="btn btn-danger mr-2">Confrim</button>
-                <a href="{{route('pista.index')}}" class="btn btn-secondary">
+                <a href="{{route('pistas.index')}}" class="btn btn-secondary">
                     Cancel
                   
                 </a>

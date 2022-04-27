@@ -26,10 +26,13 @@ public function index(){
     return view('welcome',compact('pistas'));
 }
 
-public function show($pistaId, $date){
+public function show($pistaId, $date, $time){
     $citas = Citas::where('pista_id',$pistaId)
-              ->where('date',$date)->first();
-    $times = Horas::where('cita_id',$citas->id)->where('status',0)->get();
+              ->where('date',$date)
+              ->first();
+
+    $times = Horas::where('cita_id',$citas->id)->where('status',0)
+    ->where('time',$time)->get();
     $pista_id = $pistaId;
     return view('admin.citas.citas',compact('times','date','citas','pista_id'));
 

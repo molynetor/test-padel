@@ -17,7 +17,7 @@ use App\Http\Controllers\FrontendController;
 */
 
 Route::get('/','App\Http\Controllers\FrontendController@index');
-Route::get('/nueva-cita/{pistaId}/{date}','App\Http\Controllers\FrontendController@show')->name('create.citas');
+Route::get('/nueva-cita/{pistaId}/{date}/{time}','App\Http\Controllers\FrontendController@show')->name('create.citas');
 
 Route::group(['Middleware'=>['auth','user']],function(){
 

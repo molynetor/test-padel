@@ -38,7 +38,7 @@
 	<div class="card">
 	<div class="card-header"><h3>Actualizar  Pista</h3></div>
 	<div class="card-body">
-		<form class="forms-sample" action="{{route('pista.update',[$pista->id])}}" method="post" enctype="multipart/form-data"  >@csrf
+		<form class="forms-sample" action="{{route('pistas.update',[$pista->id])}}" method="post" enctype="multipart/form-data"  >@csrf
             @method('PUT')
 			<div class="row">
 				<div class="col-lg-6">

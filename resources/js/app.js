@@ -41,6 +41,7 @@ Vue.component('find-pista', require('./components/FindPista.vue').default);
      vuetify: Vuetify,
      el: '#app',
  });
+ 
  import moment from 'moment';
 import Vue from "vue";
  
@@ -49,3 +50,8 @@ import Vue from "vue";
          return moment(String(value)).format('DD-MM-YYYY')
      }
  });
+
+
+ $(".cerrarModal").click(function(){
+    $("#modalDetalle").modal('hide')
+  });
