@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PistaController;
 use App\Http\Controllers\CitasController;
 use App\Http\Controllers\FrontendController;
-use App\Http\Controllers\CartController;
+use App\Http\Controllers\PruebaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,13 +43,19 @@ Route::get('/welcome', [App\Http\Controllers\HomeController::class,'index'])->na
 
 Route::get('/dashboard','App\Http\Controllers\DashboardController@index');
 
+Route::post('/coupon-apply', [FrontendController::class, 'CouponApply']);
 
+
+Route::get('/cupones', [App\Http\Controllers\PruebaController::class,'index'])->name('cupones');
+Route::post('/store', [App\Http\Controllers\PruebaController::class,'store'])->name('cupon.store');
+Route::get('/edit/{id}',[App\Http\Controllers\PruebaController::class,'edit'])->name('cupon.edit');
+Route::post('/update/{id}',[App\Http\Controllers\PruebaController::class,'update'])->name('cupon.update');
+Route::get('/delete/{id}',[App\Http\Controllers\PruebaController::class,'delete'])->name('cupon.delete');
 
 Route::group(['Middleware'=>['auth','admin']],function(){
     
     Route::resource('pistas',App\Http\Controllers\PistaController::class);
 
-    
     Route::resource('citas',App\Http\Controllers\CitasController::class);
     Route::post('/citas/check','App\Http\Controllers\CitasController@check')->name('citas.check');
     Route::post('/citas/update','App\Http\Controllers\CitasController@updateTime')->name('update');
@@ -60,3 +66,8 @@ Route::group(['Middleware'=>['auth','admin']],function(){
     Route::get('/status/update/{id}','App\Http\Controllers\UserListController@toggleStatus')->name('update.status');
 });
 
+
+
+    
+    
+ 

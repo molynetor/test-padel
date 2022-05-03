@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class=" col-md-12">
             <div class="card">
             <div class="card-header">Reservas ({{$bookings->count()}})</div>
                 
@@ -37,7 +37,7 @@
                           <td>{{$booking->pista_id}}</td>
                           <td>{{$booking->user->email}}</td>
                           <td>{{$booking->user->phone_number}}</td>
-                          <td>{{formatDate($booking->created_at, $format = 'd-m-Y')}}</td>
+                          <td>{{formatDate($booking->created_at, $format = 'd-m-Y H:i:s')}}</td>
                           <td>
                               @if($booking->status==0)
                               <a href="{{route('update.status',[$booking->id])}}"><button class="btn btn-primary"> Pending</button></a>

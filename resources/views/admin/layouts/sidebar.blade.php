@@ -55,6 +55,17 @@
                                     </div>
                                 </div>
                                 @endif
+                                @if(auth()->check()&& auth()->user()->role->name === 'admin')
+                                   <div class="nav-item has-sub">
+                                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Cupones</span> <span class="badge badge-danger"></span></a>
+                                    <div class="submenu-content">
+                                        
+                                    <a href="{{route('cupones')}}" class="menu-item">Gestionar cupones</a>
+                                        
+                                       
+                                    </div>
+                                </div>
+                                @endif
                                 <div class="nav-item active">
                                     <a onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" href="{{ route('logout') }}"><i class="ik ik-power dropdown-icon"></i><span>Logout</span></a>

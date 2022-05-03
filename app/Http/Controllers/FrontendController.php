@@ -6,6 +6,7 @@ use App\Models\Horas;
 use App\Models\User;
 use App\Models\Booking;
 use App\Models\BookingMail;
+use App\Models\Coupon;
 use Auth;
 
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ use Illuminate\Http\Request;
 class FrontendController extends Controller
 {
 public function index(){
-    date_default_timezone_set("Europe/Madrid");
+    
     if(request('date')){
     //comprobar que llega la fecha que buscamos
        // dd($this->findPistaOnDate(request('date')));
@@ -47,6 +48,7 @@ return $pistas;
 }
 
 public function store(Request $request){
+  
     $request->validate(['time'=>'required']);
     $fecha = $request->date;
     $hora = $request->time;
@@ -134,6 +136,26 @@ public function checkBookingTimeInterval($fecha)
         $user_id = $request->session()->get('user')[''];
         return response()->json($user_id);
       
+    }
+    public function CouponApply(Request $request){
+        $coupon = Coupon::where('coupon_name',$request->coupon_name)->where('coupon_validity','>=',Carbon::now()->format('Y-m-d'))->first();
+        if ($coupon) {
+
+            Session::put('coupon',[
+                'coupon_name' => $coupon->coupon_name,
+                'coupon_discount' => $coupon->coupon_discount,
+                'discount_amount' => round(Cart::total() * $coupon->coupon_discount/100), 
+                'total_amount' => round(Cart::total() - Cart::total() * $coupon->coupon_discount/100) 
+            ]);
+
+            return response()->json(array(
+
+                'success' => 'Coupon Applied Successfully'
+            ));
+
+        }else{
+            return response()->json(['error' => 'Invalid Coupon']);
+        } 
     }
 
 }

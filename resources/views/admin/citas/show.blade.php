@@ -31,7 +31,7 @@
 </div>
 
  
- <div class="card">
+ <div class="card col-lg-8">
      <div class="card-header">
      
         
@@ -64,7 +64,7 @@
  @if(Route::is('todas'))
  <h3>Lista de citas para Pista {{$pista_id}}: {{$todas->count()}}</h3>
 
-        <table class="table table-striped">
+        <table class="table table-striped ">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -101,4 +101,5 @@
 
 
 @endif
+
  @endsection

@@ -4,7 +4,7 @@
 
 <div class="page-header">
 <div class="row align-items-end">
-    <div class="col-lg-8">
+    <div class="col-lg-7">
         <div class="page-header-title">
             <i class="ik ik-inbox bg-blue"></i>
             <div class="d-inline">
@@ -31,7 +31,7 @@
 
 
 <div class="row">
-<div class="col-md-12">
+<div class="col-md-11 mx-auto">
        @if(Session::has('message'))
             <div class="alert bg-success alert-success text-white" role="alert">
                 {{Session::get('message')}}

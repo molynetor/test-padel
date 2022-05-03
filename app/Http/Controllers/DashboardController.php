@@ -14,7 +14,7 @@ class DashboardController extends Controller
 
         //dd(Auth::user()->role->name);
         if(Auth::user()->role->name=='user'){
-            return view('home');
+            return view('welcome');
         }
         return view('dashboard');
 

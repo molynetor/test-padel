@@ -26,8 +26,8 @@
                           <th scope="row">{{$key+1}}</th>
                           <td>{{$reserva->pista_id}}</td>
                           <td>{{$reserva->time}}</td>
-                          <td>{{formatDate($reserva->date, $format = 'd-m-Y')}}</td>
-                          <td>{{formatDate($reserva->created_at,$format = 'd-m-Y')}}</td>
+                          <td class="text-capitalize">{{ Carbon\Carbon::parse($reserva->date)->formatLocalized('%A %d %B %Y') }}</td>
+                          <td>{{formatDate($reserva->created_at,$format = 'd-m-Y h:m')}}</td>
                          
                         </tr>
                         @empty

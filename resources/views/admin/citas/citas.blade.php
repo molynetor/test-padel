@@ -14,11 +14,13 @@
                         <h4 class="text-center fs-4 fw-bold ">Información de la pista</h4>
 
                         <br>
-                        <p class="lead"> Nombre:{{$citas->pistas->name}}</p>
-                        <p class="lead"> Tipo:{{$citas->pistas->type}}</p>
-                        <p class="lead"> Fecha: {{formatDate($date, $format = 'd-m-Y')}}</p>
+                        <p class="lead text-capitalize"> Fecha: {{ Carbon\Carbon::parse($date)->formatLocalized('%A %d %B %Y') }}</p>
+                        <p class="lead"> Nombre: {{$citas->pistas->name}}</p>
+                        <p class="lead"> Tipo: {{$citas->pistas->type}}</p>
+                        
                         @foreach($times as $time)
                         <p class="lead"> Hora: {{$time->time}}</p>
+                        <p class="lead"> Precio: {{calcPrecio($date,$time->time)}}€</p>
 
 
 
@@ -65,11 +67,74 @@
                             <button type="submit" class="btn btn-success">Reservar Pista</button>
 
                         </div>
-                        <div class="cart-checkout-btn pull-right">
-                            <button type="submit" class="btn btn-primary checkout-btn">PROCCED TO CHEKOUT</button>
-                            <a href="" type="submit" class="btn btn-primary checkout-btn">PROCCED TO CHEKOUT</a>
+                        <div class="col-md-4 col-sm-12 estimate-ship-tax">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					<span class="estimate-title">Discount Code</span>
+					<p>Enter your coupon code if you have one..</p>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+<tr>
+	<td>
+		<div class="form-group">
+			<input type="text" class="form-control unicase-form-control text-input" placeholder="You Coupon.." id="coupon_name">
+		</div>
+		<div class="clearfix pull-right">
+			<button type="submit" class="btn-upper btn btn-primary" onclick="applyCoupon()">APPLY COUPON</button>
+		</div>
+	</td>
+</tr>
+		</tbody><!-- /tbody -->
+	</table><!-- /table -->
+</div><!-- /.estimate-ship-tax -->
 
-                        </div>
+
+
+
+
+<div class="col-md-4 col-sm-12 cart-shopping-total">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					<div class="cart-sub-total">
+						Subtotal <span class="inner-left-md">{{calcPrecio($date,$time->time)}}€</span>
+					</div>
+					<div class="cart-grand-total">
+						Grand Total <span class="inner-left-md">{{calcPrecio($date,$time->time)}}€</span>
+					</div>
+				</th>
+			</tr>
+		</thead><!-- /thead -->
+		<tbody>
+				<tr>
+					<td>
+						<div class="cart-checkout-btn pull-right">
+							<button type="submit" class="btn btn-primary checkout-btn">PROCCED TO CHEKOUT</button>
+
+						</div>
+					</td>
+				</tr>
+		</tbody><!-- /tbody -->
+	</table><!-- /table -->
+</div><!-- /.cart-shopping-total -->
+
+
+
+
+
+
+
+
+
+
+	</div><!-- /.row -->
+		</div><!-- /.sigin-in-->
+
                 </form>
 
 
@@ -132,7 +197,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="form-group mx-sm-4 mb-0 pb-0">
+                    <div class="form-group mx-sm-4 mb-1 pb-0">
                         <input type="submit" class="btn d-block w-100 ingresar" value="INGRESAR">
                     </div>
 
@@ -182,5 +247,41 @@ $(document).ready(function() {
 	});
 
 });
+
+<script type="text/javascript">
+  function applyCoupon(){
+    var coupon_name = $('#coupon_name').val();
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        data: {coupon_name:coupon_name},
+        url: "{{ url('/coupon-apply') }}",
+        success:function(data){
+             // Start Message 
+             const Toast = Swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      
+                      showConfirmButton: false,
+                      timer: 3000
+                    })
+                if ($.isEmptyObject(data.error)) {
+                    Toast.fire({
+                        type: 'success',
+                        icon: 'success',
+                        title: data.success
+                    })
+                }else{
+                    Toast.fire({
+                        type: 'error',
+                        icon: 'error',
+                        title: data.error
+                    })
+                }
+                // End Message 
+        }
+    })
+  }  
+</script>
 </script>
 @endsection

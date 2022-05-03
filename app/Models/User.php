@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 
 class User extends Authenticatable
 {
@@ -42,5 +43,9 @@ class User extends Authenticatable
     public function role(){
 
         return $this->hasOne('App\Models\Role','id','role_id');
+    }
+    public function preferredLocale()
+    {
+        return $this->locale;
     }
 }
