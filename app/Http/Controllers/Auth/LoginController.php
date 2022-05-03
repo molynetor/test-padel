@@ -28,6 +28,7 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+
     /**
      * Create a new controller instance.
      *
@@ -35,6 +36,24 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+       
         $this->middleware('guest')->except('logout');
+    $this->redirectTo = url()->previous();
     }
+    public function showLoginForm()
+    {
+        if(!session()->has('url.intended'))
+        {
+            session(['url.intended' => url()->previous()]);
+        }
+        return view('auth.login');
+    }
+
+public function redirectTo()
+{
+    if (session()->has('redirect_to'))
+        return session()->pull('redirect_to');
+
+    return $this->redirectTo;
+}
 }

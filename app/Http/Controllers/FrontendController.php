@@ -33,6 +33,7 @@ public function show($pistaId, $date, $time){
 
     $times = Horas::where('cita_id',$citas->id)->where('status',0)
     ->where('time',$time)->get();
+   
     $pista_id = $pistaId;
     return view('admin.citas.citas',compact('times','date','citas','pista_id'));
 
@@ -68,7 +69,7 @@ public function store(Request $request){
           ->update(['status'=>1]);
           return redirect()->back()->with('message','Su pista se ha reservado');
 
-          $Nombre_pista= User::where('id',$request->pistaId)->first();
+          $Nombre_pista= Pista::where('id',$request->pistaId)->first();
           //correo
           $mail_data = [
               'name'=>auth()->user()->name,
@@ -124,6 +125,15 @@ public function checkBookingTimeInterval($fecha)
         ->whereDate('date',$request->date)->get();
         return response()->json($pistas);
         
+    }
+    public function storeCita(Request $request){
+        
+        $fecha = $request->date;
+        $hora = $request->time;
+        //dd($precio);
+        $user_id = $request->session()->get('user')[''];
+        return response()->json($user_id);
+      
     }
 
 }

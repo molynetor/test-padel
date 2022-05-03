@@ -55,3 +55,38 @@ import Vue from "vue";
  $(".cerrarModal").click(function(){
     $("#modalDetalle").modal('hide')
   });
+
+  $('.cerrarModales').click(function(){
+    $('#registerModal').modal('hide');
+    $('#loginModal').modal('hide');
+    $('.formu').removeClass('oculto');
+  })
+
+
+  $('.login_button').on('click',function(){
+   
+    $('#registerModal').modal('hide');
+    $('#loginModal').modal('show');
+    $('.formu').addClass('oculto');
+});
+$('.register_button').on('click',function(){
+  
+    $('#loginModal').modal('hide');
+    $('.formu').addClass('oculto');
+    $('#registerModal').modal('show');
+}); 
+$(function() {
+	'use strict';
+	
+  $('.form-control').on('input', function() {
+	  var $field = $(this).closest('.form-group');
+	  if (this.value) {
+	    $field.addClass('field--not-empty');
+	  } else {
+	    $field.removeClass('field--not-empty');
+	  }
+	});
+
+});
+
+

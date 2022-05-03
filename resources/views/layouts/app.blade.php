@@ -12,6 +12,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"defer></script>
 
+   
    <!--for datepicker-->
       <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"defer></script>
@@ -77,9 +78,9 @@
                                     <a style="color: #fff; font-size:16px; font-weight: bold;" id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ Auth::user()->name }} <span class="caret"></span>
                                         @if(!auth()->user()->image)
-                    <img class=" avatar ms-2" src="/images/0809-250x250.jpg" width="40">
+                    <img class="img-fluid ms-2" src="/images/0809-250x250.jpg" width="35">
                     @else 
-                     <img class=" ms-2 avatar" src="/profile/{{auth()->user()->image}}" width="40">
+                     <img class="img-fluid ms-2" src="/profile/{{auth()->user()->image}}" width="35">
                     @endif
                                     </a>
                                  
@@ -114,8 +115,13 @@
         
         
   
-        
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
+  
+   
         <script>
+    
+       var baseUrl = window.location.href;
+  
             var dateToday = new Date();
             $( function() {
                 $("#datepicker").datepicker({
@@ -125,6 +131,7 @@
                     minDate:dateToday,
                 });
             });
+            
             
             </script>
 <style type="text/css">

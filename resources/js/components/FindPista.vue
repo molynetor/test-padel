@@ -1,4 +1,5 @@
 <template>
+
   <div class="container-fluid">
     <div class="card">
       <div class="card-header">Buscar Pista</div>
@@ -25,12 +26,14 @@
             class="col-md-4 d-flex justify-content-center"
             v-for="(p, index) in pistas"
             :key="index"
+             
           >
             <v-card
+            v-if="p.horas"
               :loading="loading"
               class="mx-auto my-12 mt-5 tarjeta"
-              max-width="350"
-              height="650"
+              max-width="300"
+              height="600"
             >
               <template slot="progress">
                 <v-progress-linear
@@ -51,7 +54,14 @@
               <v-divider class="mx-4 my-0"></v-divider>
 
               <v-card-title class="py-1"
-                >Franjas disponibles (90min) <br />
+               v-if="p.horas.length>0"
+                >Franjas disponibles (90min) <br/>
+               
+              </v-card-title>
+              <v-card-title class="py-1"
+               v-else
+                >No hay disponibilidad  <br/>
+               
               </v-card-title>
               <div class="text-muted ms-4">
                 {{ p.date | formatDate }}
@@ -104,8 +114,9 @@
             </v-card>
           </div>
         </div>
-        <div class="modal" tabindex="-1" id="modalDetalle">
+        <div class="modal" tabindex="-1" id="modalDetalle" ><strong><span id="pname"></span></strong>
   <div class="modal-dialog">
+   
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Reserva para el dia {{ info.dia | formatDate }}
@@ -123,26 +134,21 @@
       <div class="modal-footer">
        
    <div class="card">
-              
-<input type="hidden" name="pistaId" value="info.id">
-<input type="hidden" name="citaId" value="info.cita">
-<input type="hidden" name="date" value="info.dia">
+           
+<input type="hidden" name="pistaId"  id="pista_id" :value="info.id">
+<input type="hidden" name="citaId" id="cita_id" :value="info.cita">
+<input type="hidden" name="date" id="date" :value="info.dia">
+<input type="hidden" name="time" id="time" :value="info.hora">
+<input type="hidden" name="price" id="price" :value="getPrecio(info.hora, info.dia)">
+<input type="hidden" name="_token" :value="csrf">
 
+                              
+        	<a :href="'/nueva-cita/'+ info.id+'/'+info.dia+'/'+info.hora "><button class="btn btn-success">Confirmar</button></a>
 
-                     
-                    </div>
-                
-               <div class="card-footer">
-               
-                <a :href="'/nueva-cita/'+ info.id+'/'+info.dia+'/'+info.hora"><button class="btn btn-success">Reservar Pista</button></a>
               
-                    <p>Por favor inicia sesión para reservar</p>
-                    <a href=""></a>
-                    <a href="/register" class="btn btn-success btn-lg " style="width:100px;" role="button" aria-disabled="true">Registrarse</a>
-                    <a href="/login" class="btn btn-info btn-lg " style="width:100px;" role="button" aria-disabled="true">Login</a>
+                   
                    
                     
-                  
                </div>
 
       </div>
@@ -150,7 +156,9 @@
   </div>
 </div>
         <div v-if="pistas.length == 0">
-          No hay pista disponible para este día {{ this.time | formatDate }}
+          No hay pista disponible para <span v-if="this.time"> el día {{ this.time | formatDate }} </span>
+                             <span v-else> hoy </span>
+                             
         </div>
       </div>
       
@@ -213,7 +221,7 @@ export default {
   data() {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
+   csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     
     return {
       value: "",
@@ -241,6 +249,29 @@ export default {
       
       $('#modalDetalle').modal('show')
     },
+    addToCart(){
+      var pista_id = $('#pista_id').val();
+      var price = $('#price').val();
+      var date = $('#date').val();
+      var time = $('#time').val();
+     
+      console.log(date,time,pista_id,price);
+      axios
+        .post("aoi/add", { date: date , time:time, pista_id:pista_id, price:price})
+        .then((response) => {
+          setTimeout(() => {
+            this.datos = response.data;
+            this.loading = false;
+            console.log(response.data);
+          }, 400);
+        })
+        .catch((error) => {
+          alert("error");
+        });
+
+
+    },
+  
     customDate(date) {
       this.loading = true;
 
@@ -289,6 +320,7 @@ export default {
       console.log(this.pistas);
     });
   },
+  
 };
 </script>
 
@@ -297,7 +329,7 @@ export default {
 <style scoped>
 .my-datepicker >>> .my-datepicker_calendar {
   width: 100%;
-  height: 300px;
+  height: 330px;
   font-weight: bold;
 }
 .my-picker-class {

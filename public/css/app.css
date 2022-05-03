@@ -11286,3 +11286,134 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.transparente{
+  background: transparent;
+}
+
+.formulario{
+  background: rgba(0,0,0,0.2) !important;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(  0,0,0, 0.568);
+}
+.form-control{
+  background: rgba(  0,0,0, 0.3)!important;
+  border-style: none;
+  transition: all .5s ease-in;
+}
+.form-control::placeholder{
+
+  color: white !important;
+}
+.form-control:focus{
+  background: rgba(0,0,0,0.2) !important;
+  outline: none;
+  box-shadow: none;
+  color:#fff;
+ 
+}
+
+.form-group .ingresar{
+  background: #7838ff !important;
+  color: #fff !important;
+  font-size: 16px ;
+  font-weight: 700 ;
+  padding: 10px ;
+  box-shadow: 0 0 10px rgba(  0,0,0, 1.7);
+  transition: all .4s;
+  height: 50px;
+}
+.form-group .ingresar:hover{
+  color: white !important;
+  background: #606a81 !important;
+}
+.olvide{
+  color: #fff;
+  text-decoration: none;
+  text-decoration-line: none; 
+
+
+}
+
+.oculto{
+  opacity:0;
+}
+.visible{
+  opacity: ;
+}
+
+.olvide:hover{
+  color: #fff;
+  text-decoration: none;
+  text-decoration-line: none;
+  cursor: pointer;
+}
+.olvide1{
+  background: rgba(0,0,0,0.1);
+  color: #fff;
+  text-decoration: none;
+  text-decoration-line: none;
+  font-size:  18px;
+  font-weight: 700;
+  margin-top: 20px;
+  text-transform: uppercase;
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 10px;
+}
+.olvide1:hover{
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  text-decoration: none;
+  text-decoration-line: none;
+  cursor: pointer;
+}
+.content {
+  background: url(../img/prueba_login.jpg) no-repeat !important;
+  background-size: cover;
+  background-position: center center;
+ 
+  height: 100vh;
+  background-attachment: fixed;
+}
+
+
+@media(max-width: 768px){
+.content{
+  
+  background: url(../img/prueba_login.jpg)  no-repeat !important;
+  background-size: cover;
+  background-position: 51% 70% !important;
+  width: 100vw !important;
+}
+.formulario{
+  margin-top: 48px !important;
+}
+
+
+}
+  
+
+.form-group{
+  overflow: hidden;
+  margin-bottom: 0;
+  padding: 20px 15px;
+  
+  position: relative;
+ 
+   }
+   .form-group label {
+     color: #fff;
+    
+    position: absolute;
+    top: 53%;
+    margin-left:10px;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease; }
+
+    .form-group.field--not-empty label {
+      margin-top: -30px; }

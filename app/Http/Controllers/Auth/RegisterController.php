@@ -40,8 +40,25 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->redirectTo = url()->previous();
     }
 
+    public function showLoginForm()
+    {
+        if(!session()->has('url.intended'))
+        {
+            session(['url.intended' => url()->previous()]);
+        }
+        return view('auth.login');
+    }
+
+public function redirectTo()
+{
+    if (session()->has('redirect_to'))
+        return session()->pull('redirect_to');
+
+    return $this->redirectTo;
+}
     /**
      * Get a validator for an incoming registration request.
      *
@@ -78,4 +95,5 @@ class RegisterController extends Controller
             'gender'=>$data['gender']
         ]);
     }
+    
 }

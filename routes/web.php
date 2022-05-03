@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PistaController;
 use App\Http\Controllers\CitasController;
 use App\Http\Controllers\FrontendController;
-
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +18,10 @@ use App\Http\Controllers\FrontendController;
 
 Route::get('/','App\Http\Controllers\FrontendController@index');
 Route::get('/nueva-cita/{pistaId}/{date}/{time}','App\Http\Controllers\FrontendController@show')->name('create.citas');
+
+
+
+
 
 Route::group(['Middleware'=>['auth','user']],function(){
 
@@ -35,8 +39,9 @@ Auth::routes();
 
 Route::get('/welcome', [App\Http\Controllers\HomeController::class,'index'])->name('welcome');
 
-Route::get('/dashboard','App\Http\Controllers\DashboardController@index');
 
+
+Route::get('/dashboard','App\Http\Controllers\DashboardController@index');
 
 
 
@@ -45,7 +50,7 @@ Route::group(['Middleware'=>['auth','admin']],function(){
     Route::resource('pistas',App\Http\Controllers\PistaController::class);
 
     
-    Route::resource('citas',CitasController::class);
+    Route::resource('citas',App\Http\Controllers\CitasController::class);
     Route::post('/citas/check','App\Http\Controllers\CitasController@check')->name('citas.check');
     Route::post('/citas/update','App\Http\Controllers\CitasController@updateTime')->name('update');
     Route::post('/citas/show','App\Http\Controllers\CitasController@todas')->name('todas');
