@@ -56,25 +56,9 @@ import Vue from "vue";
     $("#modalDetalle").modal('hide')
   });
 
-  $('.cerrarModales').click(function(){
-    $('#registerModal').modal('hide');
-    $('#loginModal').modal('hide');
-    $('.formu').removeClass('oculto');
-  })
 
 
-  $('.login_button').on('click',function(){
-   
-    $('#registerModal').modal('hide');
-    $('#loginModal').modal('show');
-    $('.formu').addClass('oculto');
-});
-$('.register_button').on('click',function(){
-  
-    $('#loginModal').modal('hide');
-    $('.formu').addClass('oculto');
-    $('#registerModal').modal('show');
-}); 
+
 $(function() {
 	'use strict';
 	
@@ -89,4 +73,8 @@ $(function() {
 
 });
 
-
+$.ajaxSetup({
+  headers:{
+      'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+  }
+})

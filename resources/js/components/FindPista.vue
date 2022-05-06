@@ -1,3 +1,5 @@
+
+   
 <template>
 
   <div class="container-fluid">
@@ -93,7 +95,7 @@
                         name="time"
                         value="h.time"
                         class="my-0"
-                        @click="detalles(p.pistas.id,h.cita_id,p.date,h.time)"
+                        @click="detalles(p.pistas.id,h.cita_id,p.date,h.time,h.id)"
                         required
                       />
                       <span class="text-danger">{{ h.time }}</span>
@@ -102,7 +104,7 @@
 
                   <p class="text-primary mb-0" v-else>
                     <label class="btn btn-outline-primary my-0">
-                      <input type="radio" name="time" value="h.time" @click="detalles(p.pistas.id,h.cita_id,p.date,h.time)" required />
+                      <input type="radio" name="time" value="h.time" @click="detalles(p.pistas.id,h.cita_id,p.date,h.time,h.id)" required />
                       <span>{{ h.time }} </span>
                     </label>
                   </p>
@@ -128,7 +130,9 @@
         <p>Nombre: Pista {{info.id}}</p>
         <p>Hora: {{info.hora}}</p>
         <p>Cita_id: {{info.cita}}</p>
+        <p>Hora_id: {{info.hora_id}}</p>
         <p>Precio : {{ getPrecio(info.hora, info.dia)}}€</p>
+      
 
       </div>
       <div class="modal-footer">
@@ -138,12 +142,13 @@
 <input type="hidden" name="pistaId"  id="pista_id" :value="info.id">
 <input type="hidden" name="citaId" id="cita_id" :value="info.cita">
 <input type="hidden" name="date" id="date" :value="info.dia">
+<input type="hidden" name="id" id="id" :value="info.hora_id">
 <input type="hidden" name="time" id="time" :value="info.hora">
 <input type="hidden" name="price" id="price" :value="getPrecio(info.hora, info.dia)">
-<input type="hidden" name="_token" :value="csrf">
+
 
                               
-        	<a :href="'/nueva-cita/'+ info.id+'/'+info.dia+'/'+info.hora "><button class="btn btn-success">Confirmar</button></a>
+        	<button type="submit" class="btn btn-primary mb-2" @click="addToCart()" >Añadir al carrito</button>
 
               
                    
@@ -213,10 +218,8 @@ import datepicker from "vuejs-datepicker";
 import { es } from "vuejs-datepicker/dist/locale";
 import moment from "moment";
 import PulseLoader from "vue-spinner/src/PulseLoader.vue";
-    
+    moment.locale('es');
       
-
-
 export default {
   data() {
     const now = new Date();
@@ -235,7 +238,6 @@ export default {
       },
     };
   },
-
   components: {
     datepicker,
     PulseLoader,
@@ -243,40 +245,71 @@ export default {
    
   },
   methods: {
-    detalles(id,cita,dia,hora){
-      this.info={id,cita,dia, hora}
-      
+    detalles(id,cita,dia,hora,hora_id){
+      this.info={id,cita,dia,hora,hora_id}
+     
       
       $('#modalDetalle').modal('show')
     },
     addToCart(){
+      var id = $('#id').val();
       var pista_id = $('#pista_id').val();
       var price = $('#price').val();
       var date = $('#date').val();
+     
+      var fecha=  moment(date).format('LL');
       var time = $('#time').val();
      
-      console.log(date,time,pista_id,price);
-      axios
-        .post("aoi/add", { date: date , time:time, pista_id:pista_id, price:price})
-        .then((response) => {
+      console.log(id,date,time,pista_id,price);
+      $.ajax({
+            type: "POST",
+            dataType: 'json',
+            data:{
+                id:id,pista_id:pista_id,date:fecha, price:price
+            },
+            url: "/cart/data/store",
+            success:function(data){
+                console.log(data)
+                 miniCart(),
+                 $('.cerrarModal').click();
+                 // Start Message 
+                const Toast = Swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      icon: 'success',
+                      showConfirmButton: false,
+                      timer: 3000
+                    })
+                if ($.isEmptyObject(data.error)) {
+                    Toast.fire({
+                        type: 'success',
+                        title: data.success
+                    })
+                    .then((response) => {
           setTimeout(() => {
-            this.datos = response.data;
-            this.loading = false;
-            console.log(response.data);
+          
+                    window.location.href = '/mycart'
           }, 400);
         })
-        .catch((error) => {
-          alert("error");
-        });
-
-
+                }else{
+                    Toast.fire({
+                       type: 'error',
+                        icon: 'error',
+                        title: data.error
+                    })
+                }
+                // End Message 
+      
+            }
+        })
+        
+  
     },
+   
   
     customDate(date) {
       this.loading = true;
-
       this.time = moment(date).format("YYYY-MM-DD");
-
       axios
         .post("/api/findpista", { date: this.time })
         .then((response) => {
@@ -291,7 +324,6 @@ export default {
     },
     dayofweek(value) {
       
-
       const now = new Date(value);
       const dow = now.getDay();
       return dow;
@@ -319,6 +351,7 @@ export default {
       this.loading = false;
       console.log(this.pistas);
     });
+   
   },
   
 };
@@ -340,7 +373,6 @@ export default {
   height: 180px;
   width: 220px;
 }
-
 .pista img {
   border: 2px solid #2dce89;
   box-shadow: 5px 10px 18px #888888;
@@ -348,14 +380,12 @@ export default {
   height: 100%;
   object-fit: cover;
   object-position: center;
-
   border-radius: 25px 25px 25px 25px;
   -moz-border-radius: 25px 25px 25px 25px;
   -webkit-border-radius: 25px 25px 25px 25px;
 }
 .button-danger-override:hover {
   background-color: #f5365c !important;
-
   border: 0 !important;
   overflow: hidden;
 }
@@ -363,12 +393,10 @@ export default {
   transition: all 0.3s;
   color: #fff !important;
 }
-
 label.btn input:checked + span {
   background-color: rgb(93 64 200);
   padding: 4px;
 }
-
 .btn-reservar {
   background-color: rgb(93 64 200);
   bottom: 10px;

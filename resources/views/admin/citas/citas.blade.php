@@ -23,7 +23,6 @@
                         <p class="lead"> Precio: {{calcPrecio($date,$time->time)}}€</p>
 
 
-
                         @endforeach
 
                     </div>
@@ -102,10 +101,10 @@
 			<tr>
 				<th>
 					<div class="cart-sub-total">
-						Subtotal <span class="inner-left-md">{{calcPrecio($date,$time->time)}}€</span>
+						Subtotal<span class="inner-left-md">$600.00</span>
 					</div>
 					<div class="cart-grand-total">
-						Grand Total <span class="inner-left-md">{{calcPrecio($date,$time->time)}}€</span>
+						Grand Total<span class="inner-left-md">$600.00</span>
 					</div>
 				</th>
 			</tr>
@@ -248,40 +247,6 @@ $(document).ready(function() {
 
 });
 
-<script type="text/javascript">
-  function applyCoupon(){
-    var coupon_name = $('#coupon_name').val();
-    $.ajax({
-        type: 'POST',
-        dataType: 'json',
-        data: {coupon_name:coupon_name},
-        url: "{{ url('/coupon-apply') }}",
-        success:function(data){
-             // Start Message 
-             const Toast = Swal.mixin({
-                      toast: true,
-                      position: 'top-end',
-                      
-                      showConfirmButton: false,
-                      timer: 3000
-                    })
-                if ($.isEmptyObject(data.error)) {
-                    Toast.fire({
-                        type: 'success',
-                        icon: 'success',
-                        title: data.success
-                    })
-                }else{
-                    Toast.fire({
-                        type: 'error',
-                        icon: 'error',
-                        title: data.error
-                    })
-                }
-                // End Message 
-        }
-    })
-  }  
-</script>
+
 </script>
 @endsection

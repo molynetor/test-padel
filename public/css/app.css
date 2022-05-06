@@ -11338,8 +11338,8 @@ textarea.form-control-lg {
 .oculto{
   opacity:0;
 }
-.visible{
-  opacity: ;
+.hide{
+  display: none;
 }
 
 .olvide:hover{
@@ -11394,26 +11394,3 @@ textarea.form-control-lg {
 }
   
 
-.form-group{
-  overflow: hidden;
-  margin-bottom: 0;
-  padding: 20px 15px;
-  
-  position: relative;
- 
-   }
-   .form-group label {
-     color: #fff;
-    
-    position: absolute;
-    top: 53%;
-    margin-left:10px;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    -webkit-transition: .3s all ease;
-    -o-transition: .3s all ease;
-    transition: .3s all ease; }
-
-    .form-group.field--not-empty label {
-      margin-top: -30px; }

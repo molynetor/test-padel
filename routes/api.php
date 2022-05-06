@@ -19,4 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/pista/hoy','App\Http\Controllers\FrontendController@pistaHoy');
 Route::post('/findpista','App\Http\Controllers\FrontendController@findPista');
-Route::post('/store','App\Http\Controllers\FrontendController@storeCita');
+
