@@ -138,7 +138,7 @@
       <div class="modal-footer">
        
    <div class="card">
-           
+    
 <input type="hidden" name="pistaId"  id="pista_id" :value="info.id">
 <input type="hidden" name="citaId" id="cita_id" :value="info.cita">
 <input type="hidden" name="date" id="date" :value="info.dia">
@@ -146,11 +146,11 @@
 <input type="hidden" name="time" id="time" :value="info.hora">
 <input type="hidden" name="price" id="price" :value="getPrecio(info.hora, info.dia)">
 
-
+ 
                               
         	<button type="submit" class="btn btn-primary mb-2" @click="addToCart()" >Añadir al carrito</button>
 
-              
+           
                    
                    
                     
@@ -256,16 +256,17 @@ export default {
       var pista_id = $('#pista_id').val();
       var price = $('#price').val();
       var date = $('#date').val();
+      var cita_id = $('#cita_id').val();
      
       var fecha=  moment(date).format('LL');
       var time = $('#time').val();
      
-      console.log(id,date,time,pista_id,price);
+      console.log(id,date,time,pista_id,price,cita_id);
       $.ajax({
             type: "POST",
             dataType: 'json',
             data:{
-                id:id,pista_id:pista_id,date:fecha, price:price
+                id:id,pista_id:pista_id,date:date, price:price,cita_id:cita_id
             },
             url: "/cart/data/store",
             success:function(data){

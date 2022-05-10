@@ -2,34 +2,83 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row ">
+      <div class="col-md-2">
+        @include('perfil.user_sidebar')
+
+      </div>
         <div class="col-md-8">
             <div class="card">
-            <div class="card-header">Todas tus reservas ({{$reservas->count()}})</div>
+            <div class="card-header">Todas tus reservas ({{$bookings->count()}})</div>
                 
 
                 <div class="card-body ">
                 <table class="table table-striped">@csrf
                       <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Pista</th>
-                          <th scope="col">Hora</th>
-                          <th scope="col">Fecha</th>
-                          <th scope="col">Reservada el día</th>
-                          
-                        </tr>
+                      <tr style="background: #e2e2e2;">
+                      <td class="col-md-1">
+                  <label for=""> Número</label>
+                </td>
+               
+                <td class="col-md-2">
+                  <label for=""> Pista</label>
+                </td>
+
+                <td class="col-md-2">
+                  <label for=""> Día</label>
+                </td>
+
+                <td class="col-md-1">
+                  <label for=""> Hora</label>
+                </td>
+
+
+                <td class="col-md-1">
+                  <label for=""> Precio</label>
+                </td>
+
+                 <td class="col-md-2 text-center">
+                  <label for=""> Factura</label>
+                </td>
+
+              
+
+              </tr>
                       </thead>
                       <tbody>
-                        @forelse($reservas as $key=>$reserva)
+                        @forelse($bookings as $key=>$booking)
                         <tr>
-                          <th scope="row">{{$key+1}}</th>
-                          <td>{{$reserva->pista_id}}</td>
-                          <td>{{$reserva->time}}</td>
-                          <td class="text-capitalize">{{ Carbon\Carbon::parse($reserva->date)->formatLocalized('%A %d %B %Y') }}</td>
-                          <td>{{formatDate($reserva->created_at,$format = 'd-m-Y h:m')}}</td>
-                         
-                        </tr>
+                          <td scope="row" class="text-center">{{$key+1}}</th>
+                       
+                          <td class="col-md-1">
+                  <label for="">Pista {{ $booking->pista_id }}</label>
+                </td>
+
+                <td class="col-md-2">
+                  <label for=""> {{formatDate($booking->date, $format = 'd-m-Y')}}</label>
+                </td>
+
+
+                 <td class="col-md-2">
+                  <label for=""> {{ $booking->time }}</label>
+                </td>
+                <td class="col-md-2">
+                  <label for=""> {{ $booking->price }}€</label>
+                </td>
+
+
+              
+
+                 
+
+         <td class="col-md-2 text-center">
+         <a href="{{ url('/order_details/'.$booking->order_id ) }}" class="btn btn-sm btn-primary btn-block w-75 my-1"><i class="fa fa-eye"></i>Detalle</a>
+
+           <a href="{{ url('/invoice_download/'.$booking->order_id ) }}" class="btn btn-sm btn-danger btn-block w-75 my-1"><i class="fa fa-download " style="color: white;"></i>Descargar</a>
+
+        </td>
+
+              </tr>
                         @empty
                         <td>No tienes reservas</td>
                         @endforelse

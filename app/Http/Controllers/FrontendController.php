@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Booking;
 use App\Models\BookingMail;
 use App\Models\Coupon;
+use App\Models\Order;
+use PDF;
 use Auth;
 
 use Illuminate\Http\Request;
@@ -110,8 +112,28 @@ public function checkBookingTimeInterval($fecha)
   }
   public function myBookings()
     {
-        $reservas = Booking::latest()->where('user_id',auth()->user()->id)->get();
-        return view('booking.index',compact('reservas'));
+        $bookings = Booking::where('user_id',Auth::id())->orderBy('id','DESC')->get();
+     
+    
+        return view('booking.index',compact('bookings'));
+    }
+
+    public function OrderDetails($order_id){
+
+    	$order = Order::where('id',$order_id)->where('user_id',Auth::id())->first();
+    	$bookings = Booking::where('order_id',$order_id)->orderBy('id','DESC')->get();
+       
+    	return view('perfil.order_details',compact('order','bookings'));
+
+    }
+    public function InvoiceDownload($order_id){
+        $orders = Order::where('id',$order_id)->where('user_id',Auth::id())->first();
+        $bookings = Booking::where('order_id',$order_id)->orderBy('id','DESC')->get();
+    	$pdf = PDF::loadView('order.order_invoice',compact('orders','bookings'))->setPaper('a4')->setOptions([
+            'tempDir' => public_path(),
+            'chroot' => public_path(),
+    ]);
+    return $pdf->download('invoice.pdf');
     }
 
     public function pistaHoy(Request $request){

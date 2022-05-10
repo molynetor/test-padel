@@ -103,7 +103,7 @@ My Cart Page
 
 
 
-										<div class="col-md-6">
+										<div class="col-md-3">
 											<label for="">Paypal</label>
 											<input type="radio" name="payment_method" value="stripe">
 											<div class="d-flex">
@@ -111,7 +111,7 @@ My Cart Page
 											</div>
 										</div> <!-- end col md 4 -->
 	
-										<div class="col-md-3">
+										<div class="col-md-4">
 											<label for="">Card</label>
 											<input type="radio" name="payment_method" value="card">
 											<div class="d-flex">
@@ -121,6 +121,18 @@ My Cart Page
 	
 											</div>
 										</div> <!-- end col md 4 -->
+                                        @if(auth()->check()&& auth()->user()->role->name === 'admin')
+                                        <div class="col-md-2 d-flex">
+											<label for="">Cash</label>
+											<input type="radio" name="payment_method" value="cash">
+											<div >
+                                            <img src="{{ asset('/images/cash.png') }}" style="width:50px;">
+												
+	
+	
+											</div>
+										</div> <!-- end col md 4 -->
+                                        @endif
 									</div>
 
 

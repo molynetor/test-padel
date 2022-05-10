@@ -6,6 +6,7 @@ use App\Models\Citas;
 use App\Models\Horas;
 use App\Models\Pista;
 use App\Models\Coupon;
+use App\Models\Booking;
 use Illuminate\Support\Facades\Session;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Auth;
@@ -18,7 +19,7 @@ class CartController extends Controller
          }
       
         $id = Horas::find($request->id);
-        
+
         if(Cart::get($id->id)){
             return response()->json(['error' => 'Ya tienes esta hora en el carrito']); 
         }else{
@@ -41,8 +42,8 @@ class CartController extends Controller
             }
         }
         Cart::add($id->id, $id->time,$request->price,1,$request->date,$request->pista_id
-       
     );
+ 
     
  
     return response()->json(['success' => 'Añadido al carrito']);

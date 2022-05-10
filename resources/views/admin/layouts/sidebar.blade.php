@@ -1,7 +1,7 @@
 <div class="page-wrap">
                 <div class="app-sidebar colored">
                     <div class="sidebar-header">
-                        <a class="header-brand" href="{{ url('dashboard')}}">
+                        <a class="header-brand" href="{{ url('/')}}">
                             <div class="logo-img">
                                <img src="{{asset('template/src/img/brand-white.svg')}}" class="header-brand-img" alt="lavalite"> 
                             </div>

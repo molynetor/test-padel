@@ -9,6 +9,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartPageController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\CashController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +31,8 @@ Route::get('/nueva-cita/{pistaId}/{date}/{time}','App\Http\Controllers\FrontendC
 Route::group(['Middleware'=>['auth','user']],function(){
 
     Route::get('/perfil','App\Http\Controllers\PerfilController@index');
+    Route::get('/order_details/{order_id}', [FrontendController::class, 'OrderDetails']);
+    Route::get('/invoice_download/{order_id}',[FrontendController::class, 'invoiceDownload']);
     Route::post('/perfil/store','App\Http\Controllers\PerfilController@store')->name('perfil.store');
     Route::post('/perfil-foto','App\Http\Controllers\PerfilController@perfilFoto')->name('perfil.foto');
 
@@ -90,6 +93,7 @@ Route::group(['Middleware'=>['auth','admin']],function(){
     Route::get('/usuarios','App\Http\Controllers\UserListController@index')->name('usuarios');
     Route::get('/usuarios/all','App\Http\Controllers\UserListController@allReservas')->name('all.reservas');
     Route::get('/status/update/{id}','App\Http\Controllers\UserListController@toggleStatus')->name('update.status');
+    Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
 });
 
 

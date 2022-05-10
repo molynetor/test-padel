@@ -30,10 +30,6 @@ Stripe Payment Page
         <div class="checkout-box ">
             <div class="row">
 
-
-
-
-
                 <div class="col-md-4">
                     <!-- checkout-progress-sidebar -->
                     <div class="checkout-progress-sidebar ">
@@ -105,7 +101,7 @@ Stripe Payment Page
                             <div class="panel panel-default credit-card-box">
                                 <div class="panel-heading display-table">
                                     <div class="row display-tr">
-                                        <h3 class="panel-title display-td">Payment Details</h3>
+                                        <h3 class="panel-title display-td">Detalles del pago</h3>
                                         <div class="display-td">
 										<i class="fa-solid fa-circle-check"></i>
                                         </div>
@@ -127,14 +123,14 @@ Stripe Payment Page
 
                                         <div class='form-row row'>
                                             <div class='col-xs-12 form-group required'>
-                                                <label class='control-label'>Name on Card</label> <input
+                                                <label class='control-label'>Nombre en la tarjeta</label> <input
                                                     class='form-control' size='4' type='text'>
                                             </div>
                                         </div>
 
                                         <div class='form-row row'>
                                             <div class='col-xs-12 form-group card required'>
-                                                <label class='control-label'>Card Number</label> <input
+                                                <label class='control-label'>Número de tarjeta</label> <input
                                                     autocomplete='off' class='form-control card-number' size='20'
                                                     type='text'>
                                             </div>
@@ -147,12 +143,12 @@ Stripe Payment Page
                                                     type='text'>
                                             </div>
                                             <div class='col-xs-12 col-md-4 form-group expiration required'>
-                                                <label class='control-label'>Expiration Month</label> <input
+                                                <label class='control-label'>Mes caducidad</label> <input
                                                     class='form-control card-expiry-month' placeholder='MM' size='2'
                                                     type='text'>
                                             </div>
                                             <div class='col-xs-12 col-md-4 form-group expiration required'>
-                                                <label class='control-label'>Expiration Year</label> <input
+                                                <label class='control-label'>Año caducidad</label> <input
                                                     class='form-control card-expiry-year' placeholder='YYYY' size='4'
                                                     type='text'>
                                             </div>
@@ -160,8 +156,7 @@ Stripe Payment Page
 
                                         <div class='form-row row'>
                                             <div class='col-md-12 error form-group hide'>
-                                                <div class='alert-danger alert'>Please correct the errors and try
-                                                    again.</div>
+                                                <div class='alert-danger alert'>Corrija los errores y vuelva a introducir los datos</div>
                                             </div>
                                         </div>
 										<input type="hidden" name="name" value="{{ $data['name'] }}">
@@ -172,8 +167,8 @@ Stripe Payment Page
 
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now
-                                                    ($100)</button>
+                                                <button class="btn btn-primary btn-lg btn-block" type="submit" >Pagar Ahora
+                                                   </button>
                                             </div>
                                         </div>
 

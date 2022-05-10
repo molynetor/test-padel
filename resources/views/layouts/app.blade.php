@@ -87,7 +87,7 @@
                 <div class="pull-right"> <span class="text">Sub Total :</span>
                     <span class='price'  id="cartSubTotal"> </span> </div>
                   <div class="clearfix"></div>
-                  <a href="{{ route('mycheckout') }}" type="submit" class="btn btn-primary checkout-btn">PAGAR</a>
+                  <a href="{{ route('mycart') }}" type="submit" class="btn btn-primary checkout-btn">PAGAR</a>
                 <!-- /.cart-total--> 
                 
               </li>
@@ -121,7 +121,8 @@
                                     @if(auth()->check()&& auth()->user()->role->name === 'user')
                                         <a href="{{url('perfil')}}"  class="dropdown-item"style="color: #000; font-size:16px; font-weight: bold;">Perfil</a>
                                         @else 
-                                        <a href="{{url('dashboard')}}"  class="dropdown-item">Dashboard</a>
+                                        <a href="{{url('perfil')}}"  class="dropdown-item"style="color: #000; font-size:16px; font-weight: bold;">Perfil</a>
+                                        <a href="{{url('dashboard')}}"  class="dropdown-item" style="color: #000; font-size:16px; font-weight: bold;">Dashboard</a>
                                         @endif
                                         <a style="color: #000; font-size:16px; font-weight: bold;" class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
@@ -171,7 +172,7 @@
                     miniCart += `<div class="cart-item product-summary">
                     <div class="row">
                     <div class="col-xs-4">
-                    <img src="{{asset('images')}}/${response.pistas[value.conditions-1].image}" class="table-user-thumb small"></div>
+                    <img src="{{asset('images')}}/${response.pistas[value.conditions-1].image}" class="table-user-thumb pista-mini"></div>
             </div>
             <div class="col-xs-7">
               <h3 class="name"><a href="index.php?page-detail">Hora ${value.name}</a></h3>
@@ -247,7 +248,7 @@
    
         
         <td class="col-md-2">
-        <img src="{{asset('images')}}/${response.pistas[value.conditions-1].image}" class="table-user-thumb-2" ></div>
+        <img src="{{asset('images')}}/${response.pistas[value.conditions-1].image}" class="table-user-thumb-2 pista" ></div>
         </td>
         <td>
         <div class="price">Pista ${value.conditions} </div>
@@ -317,6 +318,7 @@
             }
         });
     }
+
 
   function applyCoupon(){
     var coupon_name = $('#coupon_name').val();
@@ -545,7 +547,16 @@ $(function() {
     .avatar{
         width: 40px; height: 40px; border-radius: 50%;
     }
-
+    .pista {
+  height: 120px;
+  width: 150px;
+  border-radius: 12%;
+}
+ .pista-mini{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+ }
 </style>
 <style>
     /**

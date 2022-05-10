@@ -13,12 +13,15 @@ class PerfilController extends Controller
     }
 
     public function store(Request $request){
-        $this->validate($request,[
-    		'name'=>'required',
-    		'gender'=>'required'
+
+		$this->validate($request,[
+			'name'=>'required',
+    		
     	]);
-    	User::where('id',auth()->user()->id)
-    		->update($request->except('_token'));
+		
+    	$update= User::where('id',auth()->user()->id)
+		->update($request->except('_token'));
+	
     	return redirect()->back()->with('message','Datos actualizados');
         
     }

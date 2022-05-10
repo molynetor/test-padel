@@ -31,6 +31,7 @@ class UserListController extends Controller
     public function allReservas()
     {
         $bookings = Booking::latest()->paginate(20);
+        $orders = Booking::latest()->paginate(20);
         return view('admin.userlist.index',compact('bookings'));
     }
 }
