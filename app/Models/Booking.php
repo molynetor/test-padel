@@ -3,6 +3,7 @@
 namespace App\Models;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Horas;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,4 +17,8 @@ class Booking extends Model
     public function order(){
         return $this->belongsTo(Order::class);
     }
+    public function horas(){
+        return $this->belongsTo(Horas::class,'time','time');
+    }
+    
 }

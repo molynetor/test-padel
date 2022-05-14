@@ -1,6 +1,7 @@
 <script src="{{ asset('js/app.js') }}"defer></script>
 
 <div class="main-content" id="app">
+
 <!--     <appc></appc> -->
                     <div class="container-fluid">
                         <div class="row clearfix">

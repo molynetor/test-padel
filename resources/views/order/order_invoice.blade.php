@@ -75,7 +75,7 @@
     </tr>
   </table>
   <br/>
-<h3>Products</h3>
+<h3>Reservas</h3>
   <table width="100%">
     <thead style="background-color: #c179e2; color:#FFFFFF;">
       <tr class="font">
@@ -112,7 +112,7 @@
   <table width="100%" style=" padding:0 10px 0 10px;">
     <tr>
         <td align="right" >
-            <h2><span style="color: green;">Subtotal:</span>{{ $orders->amount }}€</h2>
+         
             <h2><span style="color: green;">Total:</span> {{ $orders->amount }}€</h2>
             {{-- <h2><span style="color: green;">Pagada</h2> --}}
         </td>
@@ -123,8 +123,7 @@
     <p>Gracias por tu reserva!!</p>
   </div>
   <div class="authority float-right mt-5">
-      <p>-----------------------------------</p>
-      <h5>Authority Signature:</h5>
+
     </div>
 </body>
 </html>

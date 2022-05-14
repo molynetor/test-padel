@@ -18,7 +18,7 @@
 
 			 <div class="box">
 				<div class="box-header with-border">
-				  <h3 class="box-title">Coupon List</h3>
+				  <h3 class="box-title">Lista de Cupones</h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -26,11 +26,11 @@
 					  <table id="example1" class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>Coupon Name </th>
-								<th>Coupon Discount</th>
-								<th>Validity </th>
-								<th>Status </th>
-								<th>Action</th>
+								<th>Nombre </th>
+								<th>Descuento %</th>
+								<th>Validez </th>
+								<th>Estado </th>
+								<th>Acción</th>
 
 							</tr>
 						</thead>
@@ -45,10 +45,10 @@
 		<td>
 		
 		@if($item->coupon_validity >= Carbon\Carbon::now()->format('Y-m-d'))
-		 	<span class="badge badge-pill badge-success"> Valid </span>
+		 	<span class="badge badge-pill badge-success"> Activo </span>
 		 	@else
           
-           <span class="badge badge-pill badge-danger"> Invalid </span>
+           <span class="badge badge-pill badge-danger"> Inactivo </span>
 		 	@endif
 
 		 </td>
@@ -82,7 +82,7 @@
 
 			 <div class="box">
 				<div class="box-header with-border">
-				  <h3 class="box-title">Add Coupon </h3>
+				  <h3 class="box-title">Añadir </h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -98,7 +98,7 @@
         @endif
 
 	 <div class="form-group">
-		<h5>Coupon Name  <span class="text-danger">*</span></h5>
+		<h5>Nombre del Cupón  <span class="text-danger">*</span></h5>
 		<div class="controls">
 	 <input type="text"  name="coupon_name" class="form-control  @error('coupon_name') is-invalid @enderror" > 
 	 @error('coupon_name') 
@@ -109,7 +109,7 @@
 
 
 	<div class="form-group">
-		<h5>Coupon Discount(%) <span class="text-danger">*</span></h5>
+		<h5>Descuento(%) <span class="text-danger">*</span></h5>
 		<div class="controls">
 	 <input type="text" name="coupon_discount" class="form-control @error('coupon_discount') is-invalid @enderror" >
      @error('coupon_discount') 
@@ -120,7 +120,7 @@
 
 
 	<div class="form-group">
-		<h5>Coupon Validity Date  <span class="text-danger">*</span></h5>
+		<h5>Válido hasta  <span class="text-danger">*</span></h5>
 		<div class="controls">
 	 <input type="date" name="coupon_validity" class="form-control"  min="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
      @error('coupon_validity') 
@@ -133,7 +133,7 @@
 
 
 			 <div class="text-xs-right">
-	<input type="submit" class="btn btn-rounded btn-primary mb-5" value="Add New">					 
+	<input type="submit" class="btn btn-rounded btn-primary mb-5" value="Añadir">					 
 						</div>
 					</form>
 

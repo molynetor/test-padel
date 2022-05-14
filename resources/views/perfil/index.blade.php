@@ -9,10 +9,11 @@
 
         <div class="col-md-3">
             <div class="card">
-                <div class="card-header">Perfil de usuario</div>
+                <div class="card-header fw-bold fs-5">Perfil de usuario</div>
 
                 <div class="card-body">
                     <p>Nombre: {{auth()->user()->name}}</p>
+                    <p>Apellidos: {{auth()->user()->surname}}</p>
                     <p>Email: {{auth()->user()->email}}</p>
                     <p>Dirección: {{auth()->user()->address}}</p>
                     <p>Teléfono: {{auth()->user()->phone_number}}</p>
@@ -20,16 +21,16 @@
 
 
                 </div>
-                <div class="card-footer">
+            </div>
+            <div class="card-footer col-md-8">
 
-                   @include('perfil.user_sidebar')
+               @include('perfil.user_sidebar')
 
-                </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">Actualizar Información</div>
+                <div class="card-header fw-bold">Actualizar Información</div>
 
                 <div class="card-body">
                     <form action="{{route('perfil.store')}}" method="post">@csrf
@@ -38,6 +39,17 @@
                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
                                 value="{{auth()->user()->name}}">
                             @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+
+                        </div>
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input type="text" name="surname" class="form-control @error('surname') is-invalid @enderror"
+                                value="{{auth()->user()->surname}}">
+                            @error('surname')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -89,7 +101,7 @@
         </div>
         <div class="col-md-3">
             <div class="card">
-                <div class="card-header">Update Image</div>
+                <div class="card-header fw-bold">Actualizar Imagen</div>
                 <form action="{{route('perfil.foto')}}" method="post" enctype="multipart/form-data">@csrf
                     <div class="card-body">
                         @if(!auth()->user()->image)
@@ -105,7 +117,7 @@
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
-                        <button type="submit" class="btn btn-primary mt-3">Update</button>
+                        <button type="submit" class="btn btn-primary mt-3">Actualizar</button>
 
                     </div>
                 </form>

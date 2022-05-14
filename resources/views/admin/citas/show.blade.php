@@ -62,15 +62,17 @@
  </div>
 
  @if(Route::is('todas'))
- <h3>Lista de citas para Pista {{$pista_id}}: {{$todas->count()}}</h3>
+ <h3>Lista de Horas creadas para la Pista {{$pista_id}}: {{$todas->count()}}</h3>
 
-        <table class="table table-striped ">
+ <table id="data_table" class="table">
           <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">Cita_id</th>
               <th scope="col">Hora</th>
               <th scope="col">Fecha</th>
-              <th scope="col">View/Update</th>
+              <th scope="col">Ver/Actualizar</th>
+              <th class="nosort">&nbsp;</th>
+              <th class="nosort">&nbsp;</th>
             </tr>
           </thead>
           <tbody>
@@ -81,18 +83,19 @@
             
               <td>{{$cita->id}}</td>
               <td>{{$cita->time}}</td>
-              <td>{{$cita->date}}</td>
+              <td>{{formatDate($cita->date, $format = 'd-m-Y')}}</td>
               <td>
                     <form action="{{route('citas.check')}}" method="post">@csrf
                         <input type="hidden" name="date" value="{{$cita->date}}">
                         <input type="hidden" name="pista" value="{{$pista_id}}">
-                    <button type="submit" class="btn btn-primary">View/Update</button>
+                    <button type="submit" class="btn btn-primary">Ver/Actualizar</button>
 
 
                     </form>
 
 
               </td>
+              
             </tr>
             @endforeach
           </tbody>

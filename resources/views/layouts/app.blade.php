@@ -103,7 +103,7 @@
                                 
                                 @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a style="color: #fff; font-size:16px; font-weight: bold;" class="nav-link" href="{{ route('register') }}" style="color: #fff; font-size:16px; font-weight: bold;">{{ __('Register') }}</a>
+                                    <a style="color: #fff; font-size:16px; font-weight: bold;" class="nav-link" href="{{ route('register') }}" style="color: #fff; font-size:16px; font-weight: bold;">{{ __('Registro') }}</a>
                                 </li>
                                 @endif
                                 @else
@@ -111,9 +111,11 @@
                                     <a style="color: #fff; font-size:16px; font-weight: bold;" id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ Auth::user()->name }} <span class="caret"></span>
                                         @if(!auth()->user()->image)
-                    <img class="img-fluid ms-2" src="/images/0809-250x250.jpg" width="35">
+                    <img class="img-fluid ms-2" src="/images/0809-250x250.jpg" width="40"
+                                        style="border-radius: 50%;">
                     @else 
-                     <img class="img-fluid ms-2" src="/profile/{{auth()->user()->image}}" width="35">
+                     <img class="img-fluid ms-2" src="/profile/{{auth()->user()->image}}" width="40"
+                                        style="border-radius: 50%;">
                     @endif
                                     </a>
                                  
@@ -140,6 +142,16 @@
                 </div>
             </div>
         </nav>
+        @if(Session::has('message'))
+                <div class="alert alert-success text-end">
+                    {{Session::get('message')}}
+                </div>
+                @endif
+                @if(Session::has('errmessage'))
+                <div class="alert alert-danger text-end">
+                    {{Session::get('errmessage')}}
+                </div>
+                @endif
 
         <main >
 
@@ -147,7 +159,8 @@
         </main>
     </div>
         
-        
+
+   
   
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
     <script type="text/javascript">
@@ -172,13 +185,13 @@
                     miniCart += `<div class="cart-item product-summary">
                     <div class="row">
                     <div class="col-xs-4">
-                    <img src="{{asset('images')}}/${response.pistas[value.conditions-1].image}" class="table-user-thumb pista-mini"></div>
+                    <img src="{{asset('images')}}/${response.pistas[value.conditions-1].image}" class="table-user-thumb pista-mini my-3"></div>
             </div>
             <div class="col-xs-7">
               <h3 class="name"><a href="index.php?page-detail">Hora ${value.name}</a></h3>
-              <div class="price">Fecha:${value.attributes}  </div>
+              <div class="price">Fecha: ${value.attributes}  </div>
               <div class="price">Pista: ${value.conditions} </div>
-              <div class="price">Precio:  ${value.price} </div>
+              <div class="price">Precio: ${value.price}€ </div>
             </div>
             <div class="col-xs-1 action"> 
             <button type="submit" id="${value.id}" onclick="miniCartRemove(this.id)"><i class="fa fa-trash"></i></button> </div>
@@ -241,42 +254,33 @@
                     $('#vacio').html(`<p class="fs-bold fs-4 text-primary">El Carrito está vacío</p>`);
                    
                 }
-                console.log(response)
+
     var rows = ""
     $.each(response.carts, function(key,value){
-        rows += `<tr>
-   
-        
+        rows += `<tr> 
         <td class="col-md-2">
         <img src="{{asset('images')}}/${response.pistas[value.conditions-1].image}" class="table-user-thumb-2 pista" ></div>
         </td>
         <td>
         <div class="price">Pista ${value.conditions} </div>
-        
         </td>
         <td class="col-md-2">
         <div class="product-name">${value.name}</div>
         </td>
         <td>
         <div class="date"> 
-            ${value.attributes}
-           
-        </div>
-    
+            ${value.attributes}           
+        </div> 
         </td>
           <td>
           <div class="price">${value.price}€ </div>
           </td>   
-          
 
-                    
-         
         <td class="col-md-1 close-btn">
         <button type="submit" class="" id="${value.id}" onclick="cartRemove(this.id)"><i class="fa fa-times"></i></button>
         </td>
                 </tr>`
-        });
-                
+        });      
                 $('#cartPage').html(rows);
             }
         })
@@ -333,7 +337,7 @@
                 $('#couponField').hide();
                }
            
-             // Start Message 
+             // Mensaje 
              const Toast = Swal.mixin({
                       toast: true,
                       position: 'top-end',
@@ -353,7 +357,7 @@
                         title: data.error
                     })
                 }
-                // End Message 
+                
         }
     })
   } 
@@ -400,7 +404,6 @@
     });
   }
  couponCalculation();
-
 
  function couponRemove(){
         $.ajax({
@@ -512,8 +515,28 @@ $(function() {
    
 });
 </script>
-    
 
+<!-- Include the PayPal JavaScript SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id={{env('PAYPAL_SANDBOX_CLIENT_ID')}}"></script>
+
+
+
+<script>
+
+   
+
+    $('.form-control').on('input', function() {
+        var $field = $(this).closest('.form-group');
+        if (this.value) {
+            $field.addClass('field--not-empty');
+        } else {
+            $field.removeClass('field--not-empty');
+        }
+   
+
+});
+
+</script>
             
 <style type="text/css">
     body{

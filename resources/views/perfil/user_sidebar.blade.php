@@ -6,21 +6,24 @@
 
 
 @if(!auth()->user()->image)
-                    <img class="img-fluid ms-2 "style="border-radius: 50%" src="/images/0809-250x250.jpg" width="35">
+                    <img class="avatar "style="border-radius: 50%" src="/images/0809-250x250.jpg" width="50">
                     @else 
-                     <img class="img-fluid ms-2"style="border-radius: 50%" src="/profile/{{auth()->user()->image}}" width="35">
+                     <img class="avatar ms-2"style="border-radius: 50%" src="/profile/{{auth()->user()->image}}" width="50">
                     @endif
                     <span class="ms-2 fs-6 fw-bold"> {{auth()->user()->name}}</span>
                     <ul class="list-group list-group-flush">
 
-                <a href="{{ url('/') }}" class="btn btn-primary btn-sm btn-block w-50 my-2">Home</a>
+                <a href="{{ url('/') }}" class="btn btn-primary btn-sm btn-block w-75 my-2">Inicio</a>
 
 
-<a href="" class="btn btn-primary btn-sm btn-block w-50 my-1">Change Password </a>
+<a href="" class="btn btn-primary btn-sm btn-block w-75 my-1">Perfil </a>
 
-<a href="{{ route('my.booking') }}" class="btn btn-primary btn-sm btn-block w-50 my-1">Reservas</a>
+<a href="{{ route('my.booking') }}" class="btn btn-primary btn-sm btn-block w-75 my-1">Reservas</a>
 
-<a href="{{ route('logout') }}" class="btn btn-danger btn-sm btn-block w-50 my-1">Logout</a>
+<a  href="{{ route('logout') }}" class="btn btn-danger btn-sm btn-block w-75 my-1"
+                                        onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                       Salir</a>
 
 				</ul>
 

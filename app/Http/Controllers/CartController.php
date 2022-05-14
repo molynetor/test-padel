@@ -80,8 +80,8 @@ class CartController extends Controller
             Session::put('coupon',[
                 'coupon_name' => $coupon->coupon_name,
                 'coupon_discount' => $coupon->coupon_discount,
-                'discount_amount' => round(Cart::getTotal() * $coupon->coupon_discount/100), 
-                'total_amount' => round(Cart::getTotal() - Cart::getTotal() * $coupon->coupon_discount/100)  
+                'discount_amount' => round((Cart::getTotal() * $coupon->coupon_discount/100),2), 
+                'total_amount' => round((Cart::getTotal() - Cart::getTotal() * $coupon->coupon_discount/100),2) 
             ]);
  
             return response()->json(array(
@@ -127,8 +127,6 @@ class CartController extends Controller
         $cartTotal = Cart::getTotal();
         $subtotal= Cart::getSubTotal();
 
-    	
-
         return view('checkout.mycheckout',compact('carts','qty','cartTotal','pistas'));
 
             }else{
@@ -141,8 +139,6 @@ class CartController extends Controller
         return redirect()->to('/')->with($notification);
 
             }
-
-
         }else{
 
              $notification = array(

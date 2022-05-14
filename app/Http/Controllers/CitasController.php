@@ -84,12 +84,7 @@ class CitasController extends Controller
         return view('admin.citas.index',compact('times','cita_id','date','pistas'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function show(Request $request)
     {
         

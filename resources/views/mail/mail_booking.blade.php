@@ -64,7 +64,7 @@ margin: 0 !important;
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 
 <td align="center" valign="top" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 36px; font-weight: 800; line-height: 48px;margin-bottom:0;" class="mobile-center">
-</a><img src="{{asset('images')}}/logo.png" style="width:400px" class="table-user-thumb" ><a>
+</a><img src="{{asset('images')}}/logo2.png" style="width:400px" class="table-user-thumb" ><a>
 </td>
 </tr>
 </table>
@@ -86,7 +86,7 @@ margin: 0 !important;
 <td align="center" style="padding: 35px 35px 20px 35px; background-color: #ffffff;" bgcolor="#ffffff">
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
 <tr>
-<td align="center" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 0;"> <img src="https://img.icons8.com/carbon-copy/100/000000/checked-checkbox.png" width="100" height="100" style="display: block; border: 0px;" /><br>
+<td align="center" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 0;top:-15px;"> <img src="https://img.icons8.com/carbon-copy/100/000000/checked-checkbox.png" width="100" height="100" style="display: block; border: 0px;" /><br>
 <h2 style="font-size:22px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;"> Gracias por reservar en Yo Soy Tu Pádel! </h2>
 </td>
 </tr>
@@ -119,7 +119,7 @@ margin: 0 !important;
                         </tr>
                         <tr>
                             <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> Día</td>
-                            <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> {{ formatDate($order['date'][$i], $format = 'd-m-Y')} }}</td>
+                            <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> {{ $order['date'][$i] }}</td>
                         </tr>
                         <tr>
                             <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> Hora</td>

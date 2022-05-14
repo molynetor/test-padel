@@ -27,7 +27,7 @@ class CheckoutController extends Controller
     	if ($request->payment_method == 'stripe') {
     		return view('payment.stripe',compact('data','cartTotal'));
     	}elseif ($request->payment_method == 'card') {
-    		return 'card';
+            return view('payment.paypal',compact('data','cartTotal'));
     	}else{
            
             return view('payment.cash',compact('data','cartTotal'));

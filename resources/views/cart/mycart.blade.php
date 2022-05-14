@@ -103,21 +103,23 @@ My Cart Page
 
 
 
-										<div class="col-md-3">
-											<label for="">Paypal</label>
+										<div class="col-md-5">
+											<label for="">Tarjeta</label>
 											<input type="radio" name="payment_method" value="stripe">
 											<div class="d-flex">
-											<img src="{{ asset('/images/1.png') }}">
+                                            <img src="{{ asset('/images/3.png') }}">
+												<img src="{{ asset('/images/4.png') }}">
+										
 											</div>
 										</div> <!-- end col md 4 -->
 	
 										<div class="col-md-4">
-											<label for="">Card</label>
+											<label for="">Paypal</label>
 											<input type="radio" name="payment_method" value="card">
 											<div class="d-flex">
-												<img src="{{ asset('/images/3.png') }}">
-												<img src="{{ asset('/images/4.png') }}">
-	
+												
+                                            <img src="{{ asset('/images/1.png') }}">
+                                            <a href="" class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold"></a>
 	
 											</div>
 										</div> <!-- end col md 4 -->
@@ -149,6 +151,7 @@ My Cart Page
 										<button type="submit" class="btn-upper btn btn-primary checkout-page-button">Proceder al pago</button>
 
 </form>                                 </div>
+
 </div>
                                     </td>
                                 </tr>
@@ -259,24 +262,7 @@ My Cart Page
 </div>
 @endif
 
-<script type="text/javascript" src="/javascripts/jquery-3.1.1.min.js"></script>
 
-<script>
-$(function() {
-    'use strict';
-
-    $('.form-control').on('input', function() {
-        var $field = $(this).closest('.form-group');
-        if (this.value) {
-            $field.addClass('field--not-empty');
-        } else {
-            $field.removeClass('field--not-empty');
-        }
-    });
-
-});
-
-</script>
 
 
 @endsection

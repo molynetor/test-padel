@@ -53,20 +53,15 @@
 
         </div>
         <div class="card-body">
-                  <div class="datepicker">
+                  <div class="datepicker col-md-3">
 
-                      <input type="text" class="datepicker-picker" id="datepicker" name="date" class="date">
-                       <input type="text" id="datepickerAlt" class="date" >
+                  <input type="date" name="date" class="form-control"  min="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
 
                   </div>
 
 
         </div>
     </div>
-
-
-
-
 
     <div class="col-lg-6">
 					<label for="">Pista</label>
@@ -135,7 +130,7 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Crear</button>
         </div>
     </div>
     </form>

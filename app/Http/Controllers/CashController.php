@@ -66,7 +66,7 @@ class CashController extends Controller
              'time' => $cart->name,
              'date' =>  $cart->attributes[0],
              'price' => $cart->price,
-             'status'=>1,
+             'status'=>0,
              'created_at' => Carbon::now(),
              
            ]);

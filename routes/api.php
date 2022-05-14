@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/pista/hoy','App\Http\Controllers\FrontendController@pistaHoy');
 Route::post('/findpista','App\Http\Controllers\FrontendController@findPista');
 
+Route::group(['prefix'=>'paypal'], function(){
+    Route::post('/order/create',[\App\Http\Controllers\PaypalController::class,'create']);
+    Route::post('/order/capture/',[\App\Http\Controllers\PaypalController::class,'capture']);
+});

@@ -77,7 +77,7 @@
 
 			
             
-              <button type="submit" class="btn btn-primary mr-2 mt-3">Submit</button>
+              <button type="submit" class="btn btn-primary mr-2 mt-3">Enviar</button>
                <button class="btn btn-light mt-3">Cancel</button>
 
 

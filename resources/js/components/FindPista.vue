@@ -200,7 +200,7 @@
           id="ctl00_ContentPlaceHolderContenido_Label5"
           class="icono-reserva-azul"
           style="margin-right: 10px"
-          >Hora Punta 20€</span
+          >Hora Pico 20€</span
         >
       </p>
     </div>
@@ -345,7 +345,6 @@ export default {
     }
   },
   mounted() {
-    //let time = moment(date).parseZone("Australia/Melbourne");
     this.loading = true;
     axios.get("/api/pista/hoy").then((response) => {
       this.pistas = response.data;

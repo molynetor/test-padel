@@ -10,10 +10,12 @@ use App\Http\Controllers\CartPageController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\CashController;
+use App\Http\Controllers\PaypalController;
+use App\Http\Controllers\UserListController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
-|--------------------------------------------------------------------------
+|--------------------------------------------------------------------------    
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
@@ -24,7 +26,13 @@ use App\Http\Controllers\CashController;
 Route::get('/','App\Http\Controllers\FrontendController@index');
 Route::get('/nueva-cita/{pistaId}/{date}/{time}','App\Http\Controllers\FrontendController@show')->name('create.citas');
 
+route::get('createpaypal',[PaypalController::class,'createpaypal'])->name('createpaypal');
 
+route::get('processPaypal',[PaypalController::class,'processPaypal'])->name('processPaypal');
+
+route::get('processSuccess',[PaypalController::class,'processSuccess'])->name('processSuccess');
+
+route::get('processCancel',[PaypalController::class,'processCancel'])->name('processCancel');
 
 
 
@@ -45,7 +53,7 @@ Auth::routes();
 
 
 Route::get('/welcome', [App\Http\Controllers\HomeController::class,'index'])->name('welcome');
-
+ Route::post('/perfil-foto','App\Http\Controllers\PerfilController@perfilFoto')->name('perfil.foto');
 
 
 Route::get('/dashboard','App\Http\Controllers\DashboardController@index');
@@ -93,7 +101,16 @@ Route::group(['Middleware'=>['auth','admin']],function(){
     Route::get('/usuarios','App\Http\Controllers\UserListController@index')->name('usuarios');
     Route::get('/usuarios/all','App\Http\Controllers\UserListController@allReservas')->name('all.reservas');
     Route::get('/status/update/{id}','App\Http\Controllers\UserListController@toggleStatus')->name('update.status');
+    Route::get('/status/cancel/{id}','App\Http\Controllers\UserListController@cancelStatus')->name('cancel.status');
     Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
+   
+    Route::prefix('reports')->group(function(){
+
+       
+        Route::post('/search/by/month', [UserListController::class, 'ReportByMonth'])->name('search-by-month');
+        Route::post('/search/by/year', [UserListController::class, 'ReportByYear'])->name('search-by-year');
+        
+        });
 });
 
 

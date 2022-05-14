@@ -65,14 +65,14 @@
             @endif
         </div>
       
-        <div class="card-body">
-                  <div class="datepicker">
-
-                      <input type="text" class="datepicker-picker" id="datepicker" name="date" class="date">
-                       <input type="text" id="datepickerAlt" class="date" >
-
-                  </div>
-
+        <div class="card-body col-md-3">
+                 
+                  <div class="form-group">
+	
+		<div class="controls">
+	 <input type="date" name="date" class="form-control"  min="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
+   
+	  </div>
 
         </div>
     </div>
@@ -149,7 +149,7 @@
     
     <div class="card">
         <div class="card-body">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Enviar</button>
         </div>
     </div>
     

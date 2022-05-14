@@ -13,7 +13,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-8">
         <nav class="breadcrumb-container" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -31,14 +31,14 @@
 
 
 <div class="row">
-<div class="col-md-11 mx-auto">
+<div class="col-md-5 mx-auto">
        @if(Session::has('message'))
             <div class="alert bg-success alert-success text-white" role="alert">
                 {{Session::get('message')}}
             </div>
         @endif
     <div class="card">
-        <div class="card-header"><h3>Data Table</h3>
+        <div class="card-header"><h3>Tabla Pistas</h3>
 
         </div>
         <div class="card-body">
@@ -47,8 +47,8 @@
                     <tr>
                         <th>ID</th>  
                         <th >Imagen</th>
-                        <th>Name</th>          
-                        <th>Type</th>
+                        <th>Nombre</th>          
+                        <th>Tipo</th>
                         <th class="nosort">&nbsp;</th>
                         <th class="nosort">&nbsp;</th>
                         

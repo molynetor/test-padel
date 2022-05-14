@@ -36,7 +36,7 @@ Stripe Payment Page
                         <div class="panel-group">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h4 class="unicase-checkout-title">Your Shopping Amount </h4>
+                                    <h3 class="unicase-checkout-title">Tu cesta </h3>
                                 </div>
                                 <div class="">
                                     <ul class="nav nav-checkout-progress list-unstyled">
@@ -46,29 +46,29 @@ Stripe Payment Page
                                         <li>
                                             @if(Session::has('coupon'))
 
-                                            <strong>SubTotal: </strong> ${{ $cartTotal }}
+                                            <strong>SUB TOTAL: </strong> {{ $cartTotal }}€
                                             <hr>
 
-                                            <strong>Coupon Name : </strong>
+                                            <strong>NOMBRE CUPÓN : </strong>
                                             {{ session()->get('coupon')['coupon_name'] }}
                                             ( {{ session()->get('coupon')['coupon_discount'] }} % )
                                             <hr>
 
-                                            <strong>Coupon Discount : </strong>
-                                            ${{ session()->get('coupon')['discount_amount'] }}
+                                            <strong>DESCUENTO : </strong>
+                                            {{ session()->get('coupon')['discount_amount'] }}€
                                             <hr>
 
-                                            <strong>Grand Total : </strong>
-                                            ${{ session()->get('coupon')['total_amount'] }}
+                                            <strong>TOTAL : </strong>
+                                            {{ session()->get('coupon')['total_amount'] }}€
                                             <hr>
 
 
                                             @else
 
-                                            <strong>SubTotal: </strong> ${{ $cartTotal }}
+                                            <strong>SubTotal: </strong> {{ $cartTotal }}€
                                             <hr>
 
-                                            <strong>Grand Total : </strong> ${{ $cartTotal }}
+                                            <strong>Grand Total : </strong> {{ $cartTotal }}€
                                             <hr>
 
 
@@ -101,7 +101,7 @@ Stripe Payment Page
                             <div class="panel panel-default credit-card-box">
                                 <div class="panel-heading display-table">
                                     <div class="row display-tr">
-                                        <h3 class="panel-title display-td">Detalles del pago</h3>
+                                        <h4 class="panel-title display-td">Detalles del pago</h4>
                                         <div class="display-td">
 										<i class="fa-solid fa-circle-check"></i>
                                         </div>
@@ -204,3 +204,9 @@ Stripe Payment Page
 
 
 @endsection
+
+<style>
+    .hide{
+        display:none;
+    }
+</style>

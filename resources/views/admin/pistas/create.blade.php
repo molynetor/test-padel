@@ -9,7 +9,7 @@
                 <i class="ik ik-command bg-blue"></i>
                 <div class="d-inline">
                     <h5>Pista</h5>
-                    <span>Add Pista</span>
+                    <span>Crear Pistas</span>
                 </div>
             </div>
         </div>
@@ -36,13 +36,13 @@
         @endif
        
 	<div class="card">
-	<div class="card-header"><h3>Add Pista</h3></div>
+	<div class="card-header"><h3>Añadir Pista</h3></div>
 	<div class="card-body">
 		<form class="forms-sample" action="{{route('pistas.store')}}" method="post" enctype="multipart/form-data"  >@csrf
 			<div class="row">
 				<div class="col-lg-6">
-					<label for="">Name</label>
-					<input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="name">
+					<label for="">Nombre</label>
+					<input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="nombre">
                     @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -50,8 +50,8 @@
                         @enderror
 				</div>
 				<div class="col-lg-6">
-					<label for="">Type</label>
-					<input type="text" name="type" class="form-control @error('type') is-invalid @enderror" placeholder="type">
+					<label for="">Tipo</label>
+					<input type="text" name="type" class="form-control @error('type') is-invalid @enderror" placeholder="tipo">
                      @error('type')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -60,8 +60,8 @@
 				</div>
                 <div class="col-lg-6">
                         <div class="form-group">
-                    <label>Image</label>
-                        <input type="file" class="form-control file-upload-info @error('image') is-invalid @enderror"  placeholder="Upload Image" name="image">
+                    <label>Imagen</label>
+                        <input type="file" class="form-control file-upload-info @error('image') is-invalid @enderror"  placeholder="Subir imagen" name="image">
                         <span class="input-group-append">
                        
                         </span>
@@ -76,8 +76,8 @@
 
 			
             
-              <button type="submit" class="btn btn-primary mr-2 mt-3">Submit</button>
-               <button class="btn btn-light mt-3">Cancel</button>
+              <button type="submit" class="btn btn-primary mr-2 mt-3">Enviar</button>
+               <button class="btn btn-light mt-3">Cancelar</button>
 
 
 		</form>

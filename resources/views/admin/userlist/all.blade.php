@@ -19,7 +19,7 @@
                           <th scope="col">Fecha</th>
                           <th scope="col">Hora</th>
                           <th scope="col">Pista</th>
-                          <th scope="col">email</th>
+                          <th scope="col">Email</th>
                           <th scope="col">Teléfono</th>
                           <th scope="col">Reservada el día</th>
                           <th scope="col">Estado</th>
@@ -30,7 +30,11 @@
                         @forelse($bookings as $key=>$booking)
                         <tr>
                           <td scope="row">{{$key+1}}</td>
-                          <td><img src="/profile/{{$booking->user->image}}" width="80" style="border-radius: 50%;">
+                          <td>< @if(!auth()->user()->image)
+                    <img class="img-fluid ms-2" src="/images/0809-250x250.jpg" width="35">
+                    @else 
+                     <img class="img-fluid ms-2" src="/profile/{{auth()->user()->image}}" width="35">
+                    @endif
                           <td> {{$booking->order->email}}
                            
                           </td>
