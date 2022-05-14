@@ -78,3 +78,21 @@ $.ajaxSetup({
       'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
   }
 })
+
+    // typewritter effect
+var app1 = document.querySelector('.typewritter');
+
+var typewritter = new Typewriter(app1, {
+    loop: true
+})
+
+typewritter.typeString('Buscar Pista')
+    .pauseFor(1500)
+    .deleteAll()
+    .typeString('Seleccione día')
+    .deleteAll()
+    .typeString('Escoja su hora')
+    .pauseFor(1500)
+    .start();
+
+

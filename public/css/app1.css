@@ -1,0 +1,323 @@
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Inter:wght@400;500;600&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
+@import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500&display=swap");
+:root {
+    --bg1: #151828;
+    --bg2: #3b4470;
+    --body: #babfe0;
+    --brand: #573dff;
+    --white: #fff;
+}
+body{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Ubuntu' !important;
+    color: var(--body);
+    line-height: 1.8;
+    background-color: var(--bg1) !important;
+    scroll-behavior: smooth;
+}
+*{
+    -webkit-transition: all .2s linear;
+    transition: all .3s linear;
+    border-radius: 0px !important;
+}
+
+h1,h2,h3,h4,h5,h6{
+  
+    color: #fff !important;
+}
+
+/* NavBar */
+.navbar-brand{
+    font-family: 'Dela Gothic One';
+    font-size: 32px;
+}
+.navbar{
+    background: linear-gradient(to bottom,rgb(27, 31, 52),rgba(27, 31, 52, 0.2));
+    padding:0;
+    margin:0;
+}
+.navbar a{
+    font-size: 16px;
+}
+.top-nav-collapse{
+    background-color: rgb(60, 58, 74) !important;
+    padding: 0.75rem !important;
+}
+.navbar-expand{
+    padding:0;
+}
+.btn-outline-brand{
+    background-color: transparent !important;
+    color: var(--brand) !important;
+    border: 1px solid var(--brand) !important;
+    padding: 4px 14px !important;
+}
+.btn-outline-primary{
+    background-color: transparent !important;
+    
+}
+
+ .btn-outline-brand:hover{
+    background-color: var(--brand) !important;
+    color: var(--bg1) !important;
+}
+/* Buttons */
+.btn{
+   
+    transition: all .3s;
+    border-radius: 0;
+    align-items: center;
+    height: 31px !important;
+    font-size: 13px !important;
+    padding:5px;
+}
+.btn-brand{
+    background-color: var(--brand) !important;
+    color: var(--bg1)!important;
+    padding: 4px 14px !important;
+
+}
+.navbar .navbar-nav .nav-link.active{
+    color: var(--brand);
+}
+.btn-brand:hover{
+    background-color: transparent !important;
+    color: var(--brand) !important;
+    border: 1px solid var(--brand) !important;
+}
+a{
+    color: var(--body)!important;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all .3s;
+    font-family: 'Ubuntu';
+}
+
+.navbar .navbar-nav a:hover{
+    transform: scale(1.1);
+    color: var(--brand) !important;
+}
+.navbar .navbar-nav a:hover{
+    transform: scale(1.1);
+    color: var(--brand) !important;
+}
+#navbarDropdown:hover{
+    transform: scale(1.0);
+    color: var(--brand) !important;
+}
+
+.landing-div{
+    background: url(../img/prueba_login.jpg) no-repeat scroll center;
+    height: 100vh;
+    background-size: cover;
+    color: white;
+    padding:0;
+}
+.landing-wrapper{
+    background-color:rgba(0,0,0,0.5);
+    height: 100%;
+}
+.landing-wrapper h1{
+    font-size: 80px;
+    font-family: 'Ubuntu';
+}
+.navbar.scrolling-navbar.top-nav-collapse {
+    padding:0 !important;
+    margin:0 !important;
+}
+.perfil{
+    margin-top: 100px;
+}
+.bg{
+    background-color: var(--body);
+
+}
+.texto{
+   
+    color: var(--body);
+}
+.tablas{
+    background-color: var(--bg1) !important;
+    color: #fff !important;
+}
+.body{
+    background-color: var(--body);
+}
+.drop{
+    margin-left: 80px !important;
+    background-color: var(--body)!important;
+    width: 130px;
+}
+.drop .dropdown-item{
+background: var(--body)!important;
+color: var(--bg1) !important;
+}
+.drop .dropdown-item:hover{
+    background: var(--body)!important;
+    color: var(--brand) !important;
+    }
+
+    .btn[class*="btn-outline-"] {
+        padding-top: 0;
+        padding-bottom: 0.7rem;
+    }
+/* DatePicker vue*/
+    .vdp-datepicker__calendar .cell.selected {
+        background: var(--brand) !important;
+    }
+    .vdp-datepicker__calendar .cell:not(.blank):not(.disabled).day:hover, .vdp-datepicker__calendar .cell:not(.blank):not(.disabled).month:hover, .vdp-datepicker__calendar .cell:not(.blank):not(.disabled).year:hover {
+        border: 1px solid var(--brand) !important;
+    }
+/* Blog */
+    .courses .box-container {
+        display: -ms-grid;
+        display: grid;
+        -ms-grid-columns: (minmax(15rem, 1fr))[auto-fit];
+            grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+        gap: 2rem;
+      }
+      
+      .courses .box-container .box {
+        border: 0.1rem solid rgba(255, 255, 255, 0.2);
+      }
+      
+      
+      .courses .box-container .box:hover .image img {
+        -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+      }
+      
+      .courses .box-container .box .image {
+         transition: all .3s ease;
+        height: 25rem;
+        overflow: hidden;
+       
+      }
+      
+      .courses .box-container .box .image img {
+        height: 100%;
+        width: 100%;
+        -o-object-fit: cover;
+           object-fit: cover;
+      }
+      
+      .courses .box-container .box .content {
+        padding: 2rem;
+      }
+      
+      .courses .box-container .box .content .icons {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
+        padding-bottom: 1rem;
+      }
+      
+      .courses .box-container .box .content .icons span {
+        font-size: 1.2rem;
+        text-transform: capitalize;
+        color: #fff;
+      }
+      
+      .courses .box-container .box .content .icons span i {
+        color: var(--brand);
+        padding-right: .5rem;
+      }
+      
+      .courses .box-container .box .content h3 {
+        font-size: 2rem;
+        text-transform: capitalize;
+        color: #fff;
+        padding: .5rem 0;
+      }
+      .heading {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      
+      .heading span {
+        top: -50px;
+        font-size: 2.8rem;
+        color: var(--brand);
+      }
+      
+      .heading h3 {
+        font-size: 3.5rem;
+        text-transform: capitalize;
+        color: #fff;
+      }
+      .vdp-datepicker__calendar header .up:not(.disabled):hover {
+        cursor: pointer;
+        background: var(--brand) !important;
+    }
+    .vdp-datepicker__calendar header .next:not(.disabled):hover {
+        cursor: pointer;
+        background: var(--brand) !important;
+    }
+    .vdp-datepicker__calendar header .prev:not(.disabled):hover {
+        cursor: pointer;
+        background: var(--brand) !important;
+    }
+
+    .container-fluid, .container-xxl, .container-xl, .container-lg, .container-md, .container-sm {
+        width: 100%;
+        padding-right: var(--bs-gutter-x, 0rem);
+        padding-left: var(--bs-gutter-x, 0rem);
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    /* Buscar pista */
+
+    #milestone{
+        background: linear-gradient(to right,rgba(27, 31, 52, 0.8),rgba(24, 27, 42, 0.8)), url('../img/padel4.jpeg');
+        background-size: cover;
+        background-position: center;
+        padding-top: 0px;
+        padding-bottom: 0;
+        background-attachment: fixed;
+     
+        margin-bottom: 0;
+    }
+    
+    #milestone h1{
+        color: #fff !important;
+        text-align: center !important;
+        font-size: 45px;
+        margin: 0 !important;
+        padding:0;
+    }
+    .card .card-header {
+        border-top: none !important;
+        border-bottom: none !important;
+    }
+  
+    .card .card-header {
+        display:flex;
+        justify-content: center;
+    }
+    .v-card__title {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 1.25rem;
+        font-weight: 500;
+        letter-spacing: .0125em;
+        line-height: 2rem;
+        word-break: break-all;
+        padding: 8px !important;
+    }
+    .foto{
+        width: 50px;
+        height: 50px;
+        border-radius: 50px !important;
+    }

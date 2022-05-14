@@ -54,12 +54,14 @@
                             
                           
                             <div class="dropdown">
-                                <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> @if(!auth()->user()->image)
-                    <img class="img-fluid ms-2" src="/images/0809-250x250.jpg" width="35"
+                                <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                     @if(!auth()->user()->image)
+                    <img class="img-fluid ms-2" src="/images/0809-250x250.jpg" width="35" height="35"
                                         style="border-radius: 50%;">
                     @else 
-                     <img class="img-fluid ms-2" src="/profile/{{auth()->user()->image}}" width="35"
-                                        style="border-radius: 50%;"></a>
+                     <img class="img-fluid ms-2" src="/profile/{{auth()->user()->image}}" width="35" height="35"
+                                        style="border-radius: 50%;">
+                                    </a>
                     @endif
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                                   

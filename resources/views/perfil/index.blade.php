@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container perfil">
     @if(Session::has('message'))
     <div class="alert alert-success">{{Session::get('message')}}</div>
     @endif
-    <div class="row ">
+    <div class="row mt-5">
 
-        <div class="col-md-3">
-            <div class="card">
+        <div class="col-md-3 ">
+            <div class="card bg">
                 <div class="card-header fw-bold fs-5">Perfil de usuario</div>
 
                 <div class="card-body">
@@ -22,14 +22,14 @@
 
                 </div>
             </div>
-            <div class="card-footer col-md-8">
+            <div class="card-footer col-md-8 bg">
 
                @include('perfil.user_sidebar')
 
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card">
+        <div class="col-md-6 ">
+            <div class="card bg">
                 <div class="card-header fw-bold">Actualizar Información</div>
 
                 <div class="card-body">
@@ -100,7 +100,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card">
+            <div class="card bg">
                 <div class="card-header fw-bold">Actualizar Imagen</div>
                 <form action="{{route('perfil.foto')}}" method="post" enctype="multipart/form-data">@csrf
                     <div class="card-body">

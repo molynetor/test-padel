@@ -1,13 +1,16 @@
 
    
-<template>
-
+<template >
+ <section >
   <div class="container-fluid">
-    <div class="card">
-      <div class="card-header">Buscar Pista</div>
-      <div class="card-body">
+     <div class="card row my-0" >
+    <div class="card col-md-12 " id="milestone" >
+      <div class="card-header pb-0">
+        <h1 class="typewritter"></h1></div>
+      <div class="card-body mx-auto">
         <datepicker
           class="my-datepicker"
+          
           calendar-class="my-datepicker_calendar"
           :disabledDates="disabledDates"
           :format="customDate"
@@ -18,14 +21,12 @@
         ></datepicker>
       </div>
     </div>
-
-    <div class="card row mt-5">
-      <div class="card-header">Pistas</div>
+    </div>
 
       <div class="card-body container">
         <div class="row">
           <div
-            class="col-md-4 d-flex justify-content-center"
+            class="col-md-4 d-flex justify-content-center pt-0"
             v-for="(p, index) in pistas"
             :key="index"
              
@@ -33,9 +34,9 @@
             <v-card
             v-if="p.horas"
               :loading="loading"
-              class="mx-auto my-12 mt-5 tarjeta"
+              class="mx-auto my-12 mt-5 tarjeta gradient"
               max-width="300"
-              height="600"
+              height="580"
             >
               <template slot="progress">
                 <v-progress-linear
@@ -46,7 +47,7 @@
               </template>
 
               <v-img
-                height="180"
+                height="165"
                 class="border-1"
                 :src="'/images/' + p.pistas.image"
               ></v-img>
@@ -60,12 +61,12 @@
                 >Franjas disponibles (90min) <br/>
                
               </v-card-title>
-              <v-card-title class="py-1"
+              <v-card-title class="py-1 text-white"
                v-else
                 >No hay disponibilidad  <br/>
                
               </v-card-title>
-              <div class="text-muted ms-4">
+              <div class=" ms-4">
                 {{ p.date | formatDate }}
               </div>
              
@@ -77,7 +78,7 @@
                  
                   active-class="accent-1 text-dark"
                   row
-                  class="d-flex flex-column py-0"
+                  class="d-flex flex-column py-0 "
                 >
                   <p
                     class="text-danger mb-0"
@@ -114,40 +115,40 @@
               
 
             </v-card>
-          </div>
-        </div>
-        <div class="modal" tabindex="-1" id="modalDetalle" ><strong><span id="pname"></span></strong>
-  <div class="modal-dialog">
+            </div>
+           </div>
+            <div class="modal" tabindex="-1" id="modalDetalle" ><strong><span id="pname"></span></strong>
+           <div class="modal-dialog">
    
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Reserva para el dia {{ info.dia | formatDate }}
+            <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title">Reserva para el dia {{ info.dia | formatDate }}
 
-        </h5>
-        <button type="button" class="btn-close cerrarModal" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Nombre: Pista {{info.id}}</p>
-        <p>Hora: {{info.hora}}</p>
-        <p>Cita_id: {{info.cita}}</p>
-        <p>Hora_id: {{info.hora_id}}</p>
-        <p>Precio : {{ getPrecio(info.hora, info.dia)}}€</p>
+           </h5>
+            <button type="button" class="btn-close cerrarModal" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Nombre: Pista {{info.id}}</p>
+              <p>Hora: {{info.hora}}</p>
+              <p>Cita_id: {{info.cita}}</p>
+              <p>Hora_id: {{info.hora_id}}</p>
+              <p>Precio : {{ getPrecio(info.hora, info.dia)}}€</p>
       
 
-      </div>
-      <div class="modal-footer">
+          </div>
+             <div class="modal-footer">
        
-   <div class="card">
-    
-<input type="hidden" name="pistaId"  id="pista_id" :value="info.id">
-<input type="hidden" name="citaId" id="cita_id" :value="info.cita">
-<input type="hidden" name="date" id="date" :value="info.dia">
-<input type="hidden" name="id" id="id" :value="info.hora_id">
-<input type="hidden" name="time" id="time" :value="info.hora">
-<input type="hidden" name="price" id="price" :value="getPrecio(info.hora, info.dia)">
+                <div class="card">
+                  
+              <input type="hidden" name="pistaId"  id="pista_id" :value="info.id">
+              <input type="hidden" name="citaId" id="cita_id" :value="info.cita">
+              <input type="hidden" name="date" id="date" :value="info.dia">
+              <input type="hidden" name="id" id="id" :value="info.hora_id">
+              <input type="hidden" name="time" id="time" :value="info.hora">
+              <input type="hidden" name="price" id="price" :value="getPrecio(info.hora, info.dia)">
 
- 
-                              
+              
+                                            
         	<button type="submit" class="btn btn-primary mb-2" @click="addToCart()" >Añadir al carrito</button>
 
            
@@ -156,10 +157,10 @@
                     
                </div>
 
-      </div>
-    </div>
-  </div>
-</div>
+         </div>
+  
+         </div>
+       </div>
         <div v-if="pistas.length == 0">
           No hay pista disponible para <span v-if="this.time"> el día {{ this.time | formatDate }} </span>
                              <span v-else> hoy </span>
@@ -167,7 +168,7 @@
         </div>
       </div>
       
-      <p class="text-center" v-if="pistas.length > 0">
+      <p class="text-center mt-3" v-if="pistas.length > 0">
         <img
           id="horaPico"
           class="icono-reserva-azul"
@@ -176,12 +177,12 @@
             border-width: 0px;
             vertical-align: middle;
             margin-right: 5px;
-            witdth: 12px;
-            height: 12px;
+            width: 15px;
+            height: 15px;
           "
         /><span
           id="ctl00_ContentPlaceHolderContenido_Label5"
-          class="icono-reserva-azul"
+          class="icono-reserva-azul texto"
           style="margin-right: 10px"
           >Hora Valle 12€</span
         >
@@ -193,20 +194,20 @@
             border-width: 0px;
             vertical-align: middle;
             margin-right: 5px;
-            witdth: 12px;
-            height: 12px;
+            width: 15px;
+            height: 15px;
           "
         /><span
           id="ctl00_ContentPlaceHolderContenido_Label5"
-          class="icono-reserva-azul"
-          style="margin-right: 10px"
+          class="icono-reserva-azul texto"
+          style="margin-right: 1px "
           >Hora Pico 20€</span
         >
       </p>
     </div>
   
   </div>
-  
+  </section>
 </template>
 
 <script type="text/javascript">
@@ -361,9 +362,15 @@ export default {
 
 <style scoped>
 .my-datepicker >>> .my-datepicker_calendar {
-  width: 100%;
-  height: 330px;
+  width: 400px;
+  height: 323px;
   font-weight: bold;
+  background: linear-gradient(to bottom,#babfe0,rgba(27, 31, 52, 0.2));
+  font-size: 14px !important;
+  
+}
+.gradient{
+  background: linear-gradient(to bottom,#babfe0,rgba(27, 31, 52, 0.2));
 }
 .my-picker-class {
   border: none !important;
@@ -408,6 +415,10 @@ label.btn input:checked + span {
 }
 .tarjeta {
   position: relative;
-  border: 1px solid #d9cdee;
+  border: 1px solid #573dff;
+  color: #151828;
+  border-radius: 8px !important;
+  box-shadow: 3px 3px 3px 3px  #babfe0 !important;
+  overflow: hidden;
 }
 </style>

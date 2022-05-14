@@ -6,9 +6,9 @@
 
 
 @if(!auth()->user()->image)
-                    <img class="avatar "style="border-radius: 50%" src="/images/0809-250x250.jpg" width="50">
+                    <img class="foto "style="border-radius: 50%" src="/images/0809-250x250.jpg" width="50">
                     @else 
-                     <img class="avatar ms-2"style="border-radius: 50%" src="/profile/{{auth()->user()->image}}" width="50">
+                     <img class="foto ms-2"style="border-radius: 50%" src="/profile/{{auth()->user()->image}}" >
                     @endif
                     <span class="ms-2 fs-6 fw-bold"> {{auth()->user()->name}}</span>
                     <ul class="list-group list-group-flush">

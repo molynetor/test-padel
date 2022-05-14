@@ -1,21 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row ">
+<div class="container perfil">
+    <div class="row mt-5">
       <div class="col-md-2">
         @include('perfil.user_sidebar')
 
       </div>
         <div class="col-md-8">
-            <div class="card">
+            <div class="card bg">
             <div class="card-header">Todas tus reservas ({{$bookings->count()}})</div>
                 
 
                 <div class="card-body ">
                 <table class="table table-striped">@csrf
                       <thead>
-                      <tr style="background: #e2e2e2;">
+                      <tr class="tablas">
                       <td class="col-md-1">
                   <label for=""> Número</label>
                 </td>

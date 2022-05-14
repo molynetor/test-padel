@@ -2,40 +2,93 @@
 
 @section('content')
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-sm-6">
-            <img src="/banner/banner-padel.jpg" class="img-fluid" style="border:1px solid #ccc; height:500px;">
-
-        </div>
-        @if(Auth::check())
-        <div class="col-sm-6 my-auto px-0">
-
-        @else
-        <div class="col-sm-6 my-auto px-0">
-            <h2>Crear una cuenta para reservar pista</h2>
-            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
-            <div class="mt-5">
-                <p>Por favor inicia sesión para reservar</p>
-                <a href="{{ route('register') }}"><button class="btn btn-success">Registrarse</button></a>
-                <a href="{{ route('login') }}"><button class="btn btn-secondary">Acceder</button></a>
-                @endif
+      <!-- Landing Page -->
+            <div class="landing-div">
+                <div
+                    class="landing-wrapper d-flex flex-column h-100 align-items-center justify-content-center text-center">
+                    <div class="carousel slide carousel-fade" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <h1 class="display-4 animated slideInLeft delay-1s">Disfruta de las mejores pistas 
+                                    </h1>
+                            </div>
+                            <div class="carousel-item">
+                                <h1 class="display-4 animated slideInRight delay-1s">Participa en los mejores torneos 
+                                </h1>
+                            </div>
+                            <div class="carousel-item">
+                                <h1 class="display-4 animated zoomInDown delay-1s">Da lo mejor de ti </h1>
+                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
 
     </div>
-    <hr>
-    <div class="row">
-        <div class="col-md-8 mx-auto">
+    <!-- courses section starts  -->
+<section class="courses" id="noticias">
+   <div class="heading mt-5 pt-4">
+      <span>Noticias</span>
+      <h3>Nuestros últimos torneos</h3>
+   </div>
+   <div class="box-container mb-3">
+      <div class="box">
+         <div class="image">
+            <img src="/img/padel1.jpg">
+         </div>
+         <div class="content">
+            <div class="icons">
+               <span><i class="fas fa-calendar"></i>Sábado 14 Mayo</span>
+               <span><i class="fas fa-calendar"></i>4 horas</span>
+              
+            </div>
+            <h3>Torneo Sábado 14 Mayo Rey de La Pista</h3>
+            <a href="#" class="btn btn-outline-brand">Leer Más</a>
+         </div>
+      </div>
+      <div class="box">
+         <div class="image">
+         <img src="/img/padel2.jpg">
+         </div>
+         <div class="content">
+            <div class="icons">
+               <span><i class="fas fa-calendar"></i>Sábado 14 Mayo</span>
+               <span><i class="fas fa-calendar"></i>4 horas</span>
+              
+            </div>
+            <h3>Torneo infantil de Pádel Valle de Ricote</h3>
+            <a href="#" class="btn btn-outline-brand">Leer Más</a>
+         </div>
+      </div>
+      <div class="box">
+         <div class="image">
+         <img src="/img/padel3.jpg">
+         </div>
+         <div class="content">
+            <div class="icons">
+               <span><i class="fas fa-calendar"></i>Sábado 14 Mayo</span>
+               <span><i class="fas fa-calendar"></i>4 horas</span>
+              
+            </div>
+            <h3>Maratón de pádel Sábado Santo</h3>
+            <a href="#" class="btn btn-outline-brand">Leer Más</a>
+         </div>
+      </div>
+      
+   </div>
+</section>
 
-            <find-pista></find-pista>
-        </div>
-    </div>
+<!-- courses section ends -->
+  
+   
+        
+
+            <find-pista id="reservar"></find-pista>
+       
+  
     <!-- DatePicker VueJs -->
     <!--date picker component-->
 </div>
