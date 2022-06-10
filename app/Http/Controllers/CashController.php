@@ -86,7 +86,7 @@ class CashController extends Controller
      Cart::clear();
 
      $notification = array(
-			'message' => 'Your Order Place Successfully',
+			'message' => 'Tu reserva se ha realizado correctamente',
 			'alert-type' => 'success'
 		);
 
@@ -107,8 +107,6 @@ class CashController extends Controller
           $horas_ac= Horas::where('id',$cart->id)
            ->where('time',$cart->name)
            ->update(['status'=>1]);
-  
-  
   
         }
         $invoice = Order::findOrFail($order_id);

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Auth;
 use Illuminate\Http\Request;
-
+use App\Models\BlogPost;
 class HomeController extends Controller
 {
     /**
@@ -23,10 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $blogpost = BlogPost::latest()->get();
         if(Auth::user()->role->name == 'admin'){
 
             return redirect()->to('/dashboard');
         }
-        return view('/welcome');
+        return view('welcome',compact('blogpost'));
     }
 }

@@ -10,7 +10,8 @@ use Auth;
 class CheckoutController extends Controller
 {
     public function CheckoutStore(Request $request){
-
+        
+   
         $user = User::where('id',auth()->user()->id)->first();
         $data = [
             
@@ -26,7 +27,7 @@ class CheckoutController extends Controller
 
     	if ($request->payment_method == 'stripe') {
     		return view('payment.stripe',compact('data','cartTotal'));
-    	}elseif ($request->payment_method == 'card') {
+    	}elseif ($request->payment_method == 'paypal') {
             return view('payment.paypal',compact('data','cartTotal'));
     	}else{
            

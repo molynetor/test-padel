@@ -48,7 +48,7 @@
     <tr>
         <td valign="top">
           <!-- {{-- <img src="" alt="" width="150"/> --}} -->
-          <h2 style="color: #c179e2; font-size: 26px;"><strong>Yo Soy Tu Pádel</strong></h2>
+          <h2 style="color: #573dff; font-size: 26px;"><strong>Yo Soy Tu Pádel</strong></h2>
         </td>
         <td align="right">
             <pre class="font" >
@@ -77,7 +77,7 @@
   <br/>
 <h3>Reservas</h3>
   <table width="100%">
-    <thead style="background-color: #c179e2; color:#FFFFFF;">
+    <thead style="background-color: #3b4470; color:#FFFFFF;">
       <tr class="font">
        
         <th>Reserva</th>
@@ -112,15 +112,15 @@
   <table width="100%" style=" padding:0 10px 0 10px;">
     <tr>
         <td align="right" >
-         
-            <h2><span style="color: green;">Total:</span> {{ $orders->amount }}€</h2>
-            {{-- <h2><span style="color: green;">Pagada</h2> --}}
+        <h3><span style="color: #babfe0">Descuento aplicado:</span><span style="color: #babfe0"> {{ $orders->discount }}€</span></h3>
+            <h2><u style="color: #3b4470;">Total:</u><span style="color: #573dff"> {{ $orders->amount }}€</span></h2>
+            {{-- <h2><span style="color: #573dff;">Pagada</h2> --}}
         </td>
     </tr>
    
   </table>
   <div class="thanks mt-3">
-    <p>Gracias por tu reserva!!</p>
+    <p style="color: #573dff">Gracias por reservar!!</p>
   </div>
   <div class="authority float-right mt-5">
 

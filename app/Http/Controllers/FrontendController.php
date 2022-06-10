@@ -8,6 +8,7 @@ use App\Models\Booking;
 use App\Models\BookingMail;
 use App\Models\Coupon;
 use App\Models\Order;
+use App\Models\BlogPost;
 use PDF;
 use Auth;
 
@@ -17,16 +18,16 @@ class FrontendController extends Controller
 {
 public function index(){
     
+    $blogpost = BlogPost::latest()->get();
     if(request('date')){
     //comprobar que llega la fecha que buscamos
        // dd($this->findPistaOnDate(request('date')));
-
-      $pistas = $this->findPistaOnDate(request('date'));
-      return view('welcome',compact('pistas'));
+       $pistas = $this->findPistaOnDate(request('date'));
+       return view('welcome',compact('pistas','blogpost'));
     }
     $pistas = Citas::where('date',date('Y-m-d'))->get();
     
-    return view('welcome',compact('pistas'));
+    return view('welcome',compact('pistas','blogpost'));
 }
 
 public function show($pistaId, $date, $time){
@@ -172,7 +173,7 @@ public function checkBookingTimeInterval($fecha)
 
             return response()->json(array(
 
-                'success' => 'Coupon Applied Successfully'
+                'success' => 'El cupón ha sido aplicado'
             ));
 
         }else{

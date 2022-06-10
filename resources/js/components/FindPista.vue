@@ -1,31 +1,37 @@
 
    
 <template >
- <section >
-  <div class="container-fluid">
-     <div class="card row my-0" >
-    <div class="card col-md-12 " id="milestone" >
-      <div class="card-header pb-0">
-        <h1 class="typewritter"></h1></div>
-      <div class="card-body mx-auto">
-        <datepicker
-          class="my-datepicker"
-          
-          calendar-class="my-datepicker_calendar"
-          :disabledDates="disabledDates"
-          :format="customDate"
-          v-model="value"
-          :inline="true"
-          :language="es"
-          :monday-first="true"
-        ></datepicker>
-      </div>
-    </div>
-    </div>
-
-      <div class="card-body container">
-        <div class="row">
-          <div
+ <section  >
+  <div class="container-fluid " >
+     <div class="card row my-5 " >
+        <div class="card col-md-12 " id="milestone" >
+             <div class="card-header pb-0 heading mb-2">
+                 <span >Reservar</span>
+              </div>
+              <div class="card-body mx-auto mt-0">
+                <h1 class="typewritter mb-2"></h1>
+                    <datepicker
+                      class="my-datepicker"
+                      
+                      calendar-class="my-datepicker_calendar"
+                      :disabledDates="disabledDates"
+                      :format="customDate"
+                      v-model="value"
+                      :inline="true"
+                      :language="es"
+                      :monday-first="true"
+                    ></datepicker>
+               </div>
+         </div>
+     </div>
+     <div class="card row bck ">
+      <div class="card-header heading mb-0">
+        <h4 v-if="pistas.length > 0 ">Hay Pista <span >disponible</span></h4>
+        </div>
+        
+        <div class="card-body container">
+          <div class="row">
+            <div
             class="col-md-4 d-flex justify-content-center pt-0"
             v-for="(p, index) in pistas"
             :key="index"
@@ -34,7 +40,7 @@
             <v-card
             v-if="p.horas"
               :loading="loading"
-              class="mx-auto my-12 mt-5 tarjeta gradient"
+              class="mx-auto my-12  tarjeta gradient back" 
               max-width="300"
               height="580"
             >
@@ -61,7 +67,7 @@
                 >Franjas disponibles (90min) <br/>
                
               </v-card-title>
-              <v-card-title class="py-1 text-white"
+              <v-card-title class="py-1 titulo"
                v-else
                 >No hay disponibilidad  <br/>
                
@@ -81,22 +87,23 @@
                   class="d-flex flex-column py-0 "
                 >
                   <p
-                    class="text-danger mb-0"
+                    class="text-danger mb-0" 
                     v-if="
                       h.time == '19:00' ||
                       h.time == '20:30' ||
+                      h.festive == 1  ||
                       dayofweek(p.date) == 0
                     "
                   >
                     <label
-                      class="btn btn-outline-danger button-danger-override my-0"
+                      class="btn btn-outline-javi button-danger-override boton5 my-0"
                     >
                       <input
                         type="radio"
                         name="time"
                         value="h.time"
                         class="my-0"
-                        @click="detalles(p.pistas.id,h.cita_id,p.date,h.time,h.id)"
+                        @click="detalles(p.pistas.id,h.cita_id,p.date,h.time,h.id,h.festive)"
                         required
                       />
                       <span class="text-danger">{{ h.time }}</span>
@@ -104,71 +111,67 @@
                   </p>
 
                   <p class="text-primary mb-0" v-else>
-                    <label class="btn btn-outline-primary my-0">
-                      <input type="radio" name="time" value="h.time" @click="detalles(p.pistas.id,h.cita_id,p.date,h.time,h.id)" required />
+                    <label class="btn btn-outline-primary boton5 my-0">
+                      <input type="radio" name="time" value="h.time" @click="detalles(p.pistas.id,h.cita_id,p.date,h.time,h.id,h.festive)" required />
                       <span>{{ h.time }} </span>
                     </label>
                   </p>
                 </v-chip-group>
               </v-card-text>
-              
-              
-
             </v-card>
             </div>
            </div>
-            <div class="modal" tabindex="-1" id="modalDetalle" ><strong><span id="pname"></span></strong>
-           <div class="modal-dialog">
+            <div class="modal mt-5" tabindex="-1" id="modalDetalle" ><strong><span id="pname"></span></strong>
+            <div class="modal-dialog">
    
-            <div class="modal-content">
+            <div class="modal-content style-modal">
             <div class="modal-header">
-            <h5 class="modal-title">Reserva para el dia {{ info.dia | formatDate }}
+             
+            <h5 class="modal-title titular">Reserva para el dia {{ info.dia | formatDate }}
 
            </h5>
             <button type="button" class="btn-close cerrarModal" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <p>Nombre: Pista {{info.id}}</p>
-              <p>Hora: {{info.hora}}</p>
-              <p>Cita_id: {{info.cita}}</p>
-              <p>Hora_id: {{info.hora_id}}</p>
-              <p>Precio : {{ getPrecio(info.hora, info.dia)}}€</p>
+              <img :src="'/img/info.png'" style="border-width:0px;vertical-align: middle; float: left; margin-right: 5px; width: 28px"><p class="fw-bold fs-4">Nombre: Pista {{info.id}}</p>
+              <img :src="'/img/calendar (1).png'" style="border-width:0px;vertical-align: middle; float: left; margin-right: 5px; width: 28px"><p>Día: {{ info.dia | formatDate }}</p>
+             <img :src="'/img/clock.png'" style="border-width:0px;vertical-align: middle; float: left; margin-right: 5px; width: 28px"> <p>Hora: {{info.hora}}</p>
+              
+              <img :src="'/img/money.png'" style="border-width:0px;vertical-align: middle; float: left; margin-right: 5px; width: 28px"> <p>Precio : {{ getPrecio(info.hora, info.dia,info.festive)}}€</p>
       
 
-          </div>
+             </div>
              <div class="modal-footer">
        
-                <div class="card">
+               
                   
               <input type="hidden" name="pistaId"  id="pista_id" :value="info.id">
               <input type="hidden" name="citaId" id="cita_id" :value="info.cita">
               <input type="hidden" name="date" id="date" :value="info.dia">
               <input type="hidden" name="id" id="id" :value="info.hora_id">
               <input type="hidden" name="time" id="time" :value="info.hora">
-              <input type="hidden" name="price" id="price" :value="getPrecio(info.hora, info.dia)">
+              <input type="hidden" name="festive" id="festive" :value="info.festive">
+              <input type="hidden" name="price" id="price" :value="getPrecio(info.hora, info.dia, info.festive)">
 
-              
+                                          <span data-i18n="table.ireedterm titular">Asegurate de leer los terminos de la reserva -></span>
+                                          <a data-i18n="table.hiring" class=" text-primary" target="_blank" href="storage/CONDICIONES.pdf">Política de reservas</a>
+                          
                                             
-        	<button type="submit" class="btn btn-primary mb-2" @click="addToCart()" >Añadir al carrito</button>
-
-           
-                   
-                   
-                    
-               </div>
+        	     <button type="submit" class="btn btn-outline-brand mb-2" @click="addToCart()" >Añadir al carrito</button>
 
          </div>
   
          </div>
        </div>
+       </div>
         <div v-if="pistas.length == 0">
-          No hay pista disponible para <span v-if="this.time"> el día {{ this.time | formatDate }} </span>
-                             <span v-else> hoy </span>
+         <p class="aviso"> No hay pista disponible para <span v-if="this.time" > el día <span class="brand">{{ this.time | formatDate }}</span> </span>
+                             <span v-else class="brand"> hoy </span></p>
                              
         </div>
-      </div>
+          </div>
       
-      <p class="text-center mt-3" v-if="pistas.length > 0">
+          <p class="text-center mt-3" v-if="pistas.length > 0">
         <img
           id="horaPico"
           class="icono-reserva-azul"
@@ -203,7 +206,7 @@
           style="margin-right: 1px "
           >Hora Pico 20€</span
         >
-      </p>
+         </p>
     </div>
   
   </div>
@@ -246,8 +249,9 @@ export default {
    
   },
   methods: {
-    detalles(id,cita,dia,hora,hora_id){
-      this.info={id,cita,dia,hora,hora_id}
+    detalles(id,cita,dia,hora,hora_id,festive){
+      
+      this.info={id,cita,dia,hora,hora_id,festive}
      
       
       $('#modalDetalle').modal('show')
@@ -284,7 +288,7 @@ export default {
                     })
                 if ($.isEmptyObject(data.error)) {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: data.success
                     })
                     .then((response) => {
@@ -330,14 +334,18 @@ export default {
       const dow = now.getDay();
       return dow;
     },
-    getPrecio(hora,dia){
+    getPrecio(hora,dia,festive){
+      console.log(festive);
       let precio;
       const now = new Date(dia);
       const fecha = now.getDay();
        if(
      hora == '19:00' ||
      hora == '20:30' ||
+
+     festive == 1 ||
      fecha == 0
+
    )
    return  precio = 20;
    else{
@@ -369,9 +377,7 @@ export default {
   font-size: 14px !important;
   
 }
-.gradient{
-  background: linear-gradient(to bottom,#babfe0,rgba(27, 31, 52, 0.2));
-}
+
 .my-picker-class {
   border: none !important;
   border-bottom: 1px solid #f26f31 !important;
@@ -391,18 +397,21 @@ export default {
   -moz-border-radius: 25px 25px 25px 25px;
   -webkit-border-radius: 25px 25px 25px 25px;
 }
-.button-danger-override:hover {
-  background-color: #f5365c !important;
-  border: 0 !important;
-  overflow: hidden;
-}
+
 .button-danger-override:hover span {
   transition: all 0.3s;
   color: #fff !important;
 }
 label.btn input:checked + span {
   background-color: rgb(93 64 200);
-  padding: 4px;
+  padding: 3px;
+}
+
+
+.btn span {
+ 
+    padding: 4px 12px !important;
+   
 }
 .btn-reservar {
   background-color: rgb(93 64 200);
@@ -415,10 +424,59 @@ label.btn input:checked + span {
 }
 .tarjeta {
   position: relative;
-  border: 1px solid #573dff;
+  border: 1px solid #2f2664;
   color: #151828;
   border-radius: 8px !important;
-  box-shadow: 3px 3px 3px 3px  #babfe0 !important;
+   box-shadow: 4px 6px 15px 5px rgba(165,170,204,0.85)  !important;
+-webkit-box-shadow: 4px 6px 23px 5px rgba(165,170,204,0.85);
+-moz-box-shadow: 4px 6px 23px 5px rgba(165,170,204,0.85);
   overflow: hidden;
+  transition:all .3s;
+}
+
+.back:hover{
+     color: white;
+     cursor: pointer;
+     font-size: 15px;
+     font-weight: bold;
+   
+
+ }
+ .back{
+     position: relative;
+     z-index: 1;
+     overflow: hidden;
+     transition: all .7s;
+ }
+
+ .back::before{
+     content:'';
+     position: absolute;
+     height: 0px;
+     width: 100%;
+     top: 0 ;
+     left: 0 ;
+     background: linear-gradient(-180deg,  #9ba4e2 0%, #151828 100%);
+     
+     z-index: -1;
+     transition: all .6s;
+ }
+  .back:hover::before{
+     height: 100%;
+ }
+
+.style-modal{
+ 
+     background: linear-gradient(to top,#babfe0,rgba(21, 25, 41, 0.2));
+}
+.modal-dialog {
+  position: absolute;
+  top: 80px;
+  right: 100px;
+  bottom: 0;
+  left: 0;
+  z-index: 10040;
+  overflow: auto;
+  overflow-y: auto;
 }
 </style>

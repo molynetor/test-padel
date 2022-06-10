@@ -8,35 +8,19 @@ Stripe Payment Page
 @endsection
 
 
-
-
-
-<div class="breadcrumb">
-    <div class="container">
-        <div class="breadcrumb-inner">
-            <ul class="list-inline list-unstyled">
-                <li><a href="home.html">Home</a></li>
-                <li class='active'>Stripe</li>
-            </ul>
-        </div><!-- /.breadcrumb-inner -->
-    </div><!-- /.container -->
-</div><!-- /.breadcrumb -->
-
-
-
-
 <div class="body-content">
-    <div class="container">
+    <div class="container margen">
         <div class="checkout-box ">
-            <div class="row">
+            <div class="row margen">
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <!-- checkout-progress-sidebar -->
                     <div class="checkout-progress-sidebar ">
                         <div class="panel-group">
                             <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="unicase-checkout-title">Tu cesta </h3>
+                                <div class="panel-heading d-flex align-items-center pagar mb-3">
+                                <div class="basket me-2 mb-2"> <i class="fas fa-shopping-cart titular fa-2x"></i></div>
+                                    <h3 class="unicase-checkout-title texto">TU CESTA </h3>
                                 </div>
                                 <div class="">
                                     <ul class="nav nav-checkout-progress list-unstyled">
@@ -46,29 +30,36 @@ Stripe Payment Page
                                         <li>
                                             @if(Session::has('coupon'))
 
-                                            <strong>SUB TOTAL: </strong> {{ $cartTotal }}€
+                                            <strong class="texto fs-4 fw-bold">SUB TOTAL: </strong> <span class="texto fs-4"> {{ $cartTotal }}€</span>
                                             <hr>
 
-                                            <strong>NOMBRE CUPÓN : </strong>
-                                            {{ session()->get('coupon')['coupon_name'] }}
+                                            <strong class="texto fs-4 fw-bold">NOMBRE CUPÓN : </strong>
+                                            <span class="texto fs-4">  {{ session()->get('coupon')['coupon_name'] }}
                                             ( {{ session()->get('coupon')['coupon_discount'] }} % )
+                                            </span>
+                                           
+                                           
                                             <hr>
 
-                                            <strong>DESCUENTO : </strong>
-                                            {{ session()->get('coupon')['discount_amount'] }}€
+                                            <strong class="texto fs-4 fw-bold">DESCUENTO : </strong>
+                                            <span class="texto fs-4">  {{ session()->get('coupon')['discount_amount'] }}€</span>
+                                           
                                             <hr>
 
-                                            <strong>TOTAL : </strong>
-                                            {{ session()->get('coupon')['total_amount'] }}€
+                                            <strong class="texto fs-4 fw-bold">TOTAL : </strong>
+                                            <span class="texto fs-4">  {{ session()->get('coupon')['total_amount'] }}€</span>
+                                           
                                             <hr>
 
 
                                             @else
 
-                                            <strong>SubTotal: </strong> {{ $cartTotal }}€
+                                            <strong class="texto fs-4 fw-bold">SubTotal: </strong> 
+                                            <span class="texto fs-4"> {{ $cartTotal }}€</span>
                                             <hr>
 
-                                            <strong>Grand Total : </strong> {{ $cartTotal }}€
+                                            <strong class="texto fs-4 fw-bold">Total : </strong>
+                                            <span class="texto fs-4"> {{ $cartTotal }}€</span>
                                             <hr>
 
 
@@ -92,7 +83,7 @@ Stripe Payment Page
 
 
 
-                <div class="col-md-8">
+                <div class="col-md-8 ms-3">
 
               
 
@@ -100,8 +91,8 @@ Stripe Payment Page
                         <div class="col-md-6 col-md-offset-3">
                             <div class="panel panel-default credit-card-box">
                                 <div class="panel-heading display-table">
-                                    <div class="row display-tr">
-                                        <h4 class="panel-title display-td">Detalles del pago</h4>
+                                    <div class="row display-tr mb-3">
+                                        <h4 class="panel-title display-td fs-3 uppercase">DETALLES DEL PAGO</h4>
                                         <div class="display-td">
 										<i class="fa-solid fa-circle-check"></i>
                                         </div>
@@ -123,33 +114,33 @@ Stripe Payment Page
 
                                         <div class='form-row row'>
                                             <div class='col-xs-12 form-group required'>
-                                                <label class='control-label'>Nombre en la tarjeta</label> <input
-                                                    class='form-control' size='4' type='text'>
+                                                <label class='control-label label texto fs-6'>Nombre en la tarjeta</label> <input
+                                                    class='form-control input' size='4' type='text'>
                                             </div>
                                         </div>
 
                                         <div class='form-row row'>
-                                            <div class='col-xs-12 form-group card required'>
-                                                <label class='control-label'>Número de tarjeta</label> <input
-                                                    autocomplete='off' class='form-control card-number' size='20'
+                                            <div class='col-xs-12 form-group  required'>
+                                                <label class='control-label label texto fs-6'>Número de tarjeta</label> <input
+                                                    autocomplete='off' class='form-control card-number input' 
                                                     type='text'>
                                             </div>
                                         </div>
 
                                         <div class='form-row row'>
                                             <div class='col-xs-12 col-md-4 form-group cvc required'>
-                                                <label class='control-label'>CVC</label> <input autocomplete='off'
-                                                    class='form-control card-cvc' placeholder='ex. 311' size='4'
+                                                <label class='control-label label texto fs-6'>CVC</label> <input autocomplete='off'
+                                                    class='form-control card-cvc input' placeholder='ex. 311' size='4'
                                                     type='text'>
                                             </div>
                                             <div class='col-xs-12 col-md-4 form-group expiration required'>
-                                                <label class='control-label'>Mes caducidad</label> <input
-                                                    class='form-control card-expiry-month' placeholder='MM' size='2'
+                                                <label class='control-label label texto fs-6'>Mes caducidad</label> <input
+                                                    class='form-control card-expiry-month input' placeholder='MM' size='2'
                                                     type='text'>
                                             </div>
                                             <div class='col-xs-12 col-md-4 form-group expiration required'>
-                                                <label class='control-label'>Año caducidad</label> <input
-                                                    class='form-control card-expiry-year' placeholder='YYYY' size='4'
+                                                <label class='control-label label texto fs-6'>Año caducidad</label> <input
+                                                    class='form-control card-expiry-year input' placeholder='YYYY' size='4'
                                                     type='text'>
                                             </div>
                                         </div>
@@ -165,11 +156,14 @@ Stripe Payment Page
 										
       
 
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <button class="btn btn-primary btn-lg btn-block" type="submit" >Pagar Ahora
-                                                   </button>
-                                            </div>
+                                        <div class="row pagar">
+                                            <div class="cart-checkout-btn pull-right col-md-6">
+                                                <button type="submit"
+                                                    class="btn-upper btn btn-brand checkout-page-button">Pagar Ahora</button>
+
+                                                    </div>
+                                          
+                                            
                                         </div>
 
                                     </form>

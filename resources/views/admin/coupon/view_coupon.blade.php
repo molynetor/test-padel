@@ -9,12 +9,12 @@
 
 
 		<!-- Main content -->
-		<section class="content">
+		<section class="content ">
 		  <div class="row">
 
 
 
-			<div class="col-8">
+			<div class="col-8 ">
 
 			 <div class="box">
 				<div class="box-header with-border">
@@ -25,12 +25,12 @@
 					<div class="table-responsive">
 					  <table id="example1" class="table table-bordered table-striped">
 						<thead>
-							<tr>
-								<th>Nombre </th>
-								<th>Descuento %</th>
-								<th>Validez </th>
-								<th>Estado </th>
-								<th>Acción</th>
+							<tr class="bg">
+								<th class="texto2">Nombre </th>
+								<th class="texto2">Descuento %</th>
+								<th class="texto2">Validez </th>
+								<th class="texto2">Estado </th>
+								<th class="texto2">Acción</th>
 
 							</tr>
 						</thead>
@@ -53,7 +53,7 @@
 
 		 </td>
 
-		 <td class="d-inline-block">
+		 <td class="text-center">
  <a href="{{ route('cupon.edit',$item->id) }}" class="btn btn-info" title="Edit Data"><i class="ik ik-edit-2"></i> </a>
  <a href="{{ route('cupon.delete',$item->id) }}" class="btn btn-danger" title="Delete Data" id="delete">
  	<i class="fa fa-trash"></i></a>
@@ -133,7 +133,7 @@
 
 
 			 <div class="text-xs-right">
-	<input type="submit" class="btn btn-rounded btn-primary mb-5" value="Añadir">					 
+			 <button type="submit" class="btn btn-brand " style="width: 100px !important; font-size: 16px !important; color: #babfe0 !important;height:40px !important;padding:5px !important;">Añadir</button>					 
 						</div>
 					</form>
 

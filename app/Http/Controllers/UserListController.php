@@ -4,21 +4,22 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Order;
 use App\Models\Horas;
+use App\Models\User;
 use Datetime;
 use Illuminate\Http\Request;
 
 class UserListController extends Controller
 {
     public function index(Request $request){
-
+         $users = User::latest()->get();
         $bookings = Booking::latest()->get();
         date_default_timezone_set('Europe/Madrid');
     	if($request->date){
     		$bookings = Booking::latest()->where('date',$request->date)->get();
-    		return view('admin.userlist.index',compact('bookings'));
+    		return view('admin.userlist.index',compact('bookings','users'));
     	}
     	$bookings = Booking::latest()->where('date',date('Y-m-d'))->get();
-    	return view('admin.userlist.index',compact('bookings'));
+    	return view('admin.userlist.index',compact('bookings','users'));
     }
 
     public function toggleStatus($id)
@@ -31,33 +32,34 @@ class UserListController extends Controller
     }
     public function allReservas()
     {
+        $users = User::latest()->get();
         $bookings = Booking::latest()->paginate(20);
         $orders = Booking::latest()->paginate(20);
-        return view('admin.userlist.index',compact('bookings'));
+        return view('admin.userlist.index',compact('bookings','users'));
     }
 
    public function ReportByMonth(Request $request){
+    $users = User::latest()->get();
+       $bookings = Booking::select('bookings.*')
+       ->join('orders', 'bookings.order_id', '=', 'orders.id')
+       ->where('orders.order_month',$request->month)
+       ->where('orders.order_year',$request->year_name)->latest()->get();
        
-    $bookings = Booking::select('bookings.*')
-          ->join('orders', 'bookings.order_id', '=', 'orders.id')
-          ->where('orders.order_month',$request->month)
-          ->where('orders.order_year',$request->year_name)->latest()->get();
+       return view('admin.userlist.index',compact('bookings','users'));
        
-    return view('admin.userlist.index',compact('bookings'));
-
-}   
-
-   public function ReportByYear(Request $request){
-
-    $bookings = Booking::select('bookings.*')
-    ->join('orders', 'bookings.order_id', '=', 'orders.id')
-    ->where('orders.order_year',$request->year)->latest()->get();
+    }   
     
-    return view('admin.userlist.index',compact('bookings'));
-} 
+    public function ReportByUser(Request $request){
+        $users = User::latest()->get();
+        $bookings = Booking::where('user_id',$request->user_id)->get();
+        
+        
+    return view('admin.userlist.index',compact('bookings','users'));
+    } 
 
 public function cancelStatus($id)
 {
+    //sin completar
     $booking  = Booking::find($id);
   
     $hora = Horas::with('bookings','citas')

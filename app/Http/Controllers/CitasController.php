@@ -59,11 +59,22 @@ class CitasController extends Controller
         'date' => $request->date
     ]);
     foreach($request->time as $time){
-        Horas::create([
-            'cita_id'=> $citas->id,
-            'time'=> $time,
-            //'stauts'=>0
-        ]);
+        if(isset($request->festive )){
+            Horas::create([
+                'cita_id'=> $citas->id,
+                'time'=> $time,
+                //'stauts'=>0
+                'festive'=>1
+            ]);
+
+        }else{
+            Horas::create([
+                'cita_id'=> $citas->id,
+                'time'=> $time,
+                'festive'=>0
+                //'stauts'=>0
+            ]);  
+        }
     }
     return redirect()->back()->with('message','Las citas se han programado para el '.formatDate($request->date, $format = 'd-m-Y').' en la pista '.$pista_id);
     }
@@ -128,14 +139,26 @@ class CitasController extends Controller
         //
     }
     public function updateTime(Request $request){
+     
         $cita_id = $request->cita_id;
         $citas = Horas::where('cita_id',$cita_id)->delete();
         foreach($request->time as $time){
-            Horas::create([
-                'cita_id'=>$cita_id,
-                'time'=>$time,
-                'status'=>0
-            ]);
+            if(isset($request->festive )){
+                Horas::create([
+                    'cita_id'=> $cita_id,
+                    'time'=> $time,
+                    //'stauts'=>0
+                    'festive'=>1
+                ]);
+    
+            }else{
+                Horas::create([
+                    'cita_id'=> $cita_id,
+                    'time'=> $time,
+                    'festive'=>0
+                    //'stauts'=>0
+                ]);  
+            }
         }
         return redirect()->route('citas.index')->with('message','Se ha actualizado el horario de citas!!');
     }

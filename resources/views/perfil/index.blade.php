@@ -22,7 +22,7 @@
 
                 </div>
             </div>
-            <div class="card-footer col-md-8 bg">
+            <div class="card-footer col-md-8 bg col-lg-6">
 
                @include('perfil.user_sidebar')
 
@@ -30,13 +30,13 @@
         </div>
         <div class="col-md-6 ">
             <div class="card bg">
-                <div class="card-header fw-bold">Actualizar Información</div>
+                <div class="card-header fw-bold ">Actualizar Información</div>
 
-                <div class="card-body">
-                    <form action="{{route('perfil.store')}}" method="post">@csrf
+                <div class="card-body login-form">
+                    <form action="{{route('perfil.store')}}"  method="post">@csrf
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror input"
                                 value="{{auth()->user()->name}}">
                             @error('name')
                             <span class="invalid-feedback" role="alert">
@@ -46,8 +46,8 @@
 
                         </div>
                         <div class="form-group">
-                            <label>Nombre</label>
-                            <input type="text" name="surname" class="form-control @error('surname') is-invalid @enderror"
+                            <label>Apellidos</label>
+                            <input type="text" name="surname" class="form-control @error('surname') is-invalid @enderror input"
                                 value="{{auth()->user()->surname}}">
                             @error('surname')
                             <span class="invalid-feedback" role="alert">
@@ -59,18 +59,18 @@
 
                         <div class="form-group">
                             <label>Dirección</label>
-                            <input type="text" name="address" class="form-control" value="{{auth()->user()->address}}">
+                            <input type="text" name="address" class="form-control input" value="{{auth()->user()->address}}">
 
                         </div>
                         <div class="form-group">
                             <label>Teléfono</label>
-                            <input type="text" name="phone_number" class="form-control"
+                            <input type="text" name="phone_number" class="form-control input"
                                 value="{{auth()->user()->phone_number}}">
 
                         </div>
                         <div class="form-group">
                             <label>Género</label>
-                            <select name="gender" class="form-control @error('gender') is-invalid @enderror">
+                            <select name="gender" class="form-control @error('gender') is-invalid @enderror input">
                                 <option value="">Seleccione género</option>
                                 <option value="No-Definido" @if(auth()->user()->gender==='all')selected @endif >Prefiero
                                     no decirlo</option>

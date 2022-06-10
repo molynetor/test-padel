@@ -9,7 +9,7 @@
       </div>
         <div class="col-md-8">
             <div class="card bg">
-            <div class="card-header">Todas tus reservas ({{$bookings->count()}})</div>
+            <div class="card-header fs-4 fw-bold text-left">Todas tus reservas ({{$bookings->count()}})</div>
                 
 
                 <div class="card-body ">

@@ -52,8 +52,14 @@ import Vue from "vue";
  });
 
 
- $(".cerrarModal").click(function(){
-    $("#modalDetalle").modal('hide')
+
+
+  $(window).on('load', function(){
+
+    $(".cerrarModal").click(function(){
+      $("#modalDetalle").modal('hide')
+    });
+  
   });
 
 
@@ -86,13 +92,43 @@ var typewritter = new Typewriter(app1, {
     loop: true
 })
 
-typewritter.typeString('Buscar Pista')
-    .pauseFor(1500)
+typewritter.typeString('Seleccione día')
+    .pauseFor(1000)
     .deleteAll()
-    .typeString('Seleccione día')
+    .typeString('Escoja la pista')
     .deleteAll()
-    .typeString('Escoja su hora')
+    .typeString('Click en la hora')
     .pauseFor(1500)
     .start();
 
 
+    $(document).ready(function () {
+
+
+      let $btns = $('.project-area .button-group button');
+  
+  
+      $btns.click(function (e) {
+  
+          $('.project-area .button-group button').removeClass('active');
+          e.target.classList.add('active');
+  
+          let selector = $(e.target).attr('data-filter');
+          $('.project-area .grid').isotope({
+              filter: selector
+          });
+  
+          return false;
+      })
+  
+      $('.project-area .button-group #btn1').trigger('click');
+  
+      $('.project-area .grid .test-popup-link').magnificPopup({
+          type: 'image',
+          gallery: { enabled: true }
+      });
+  
+  
+  
+  });
+  AOS.init();

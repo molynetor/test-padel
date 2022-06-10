@@ -31,24 +31,24 @@
 
 
 <div class="row">
-<div class="col-md-5 mx-auto">
+<div class="col-md-8 mx-auto bg2">
        @if(Session::has('message'))
             <div class="alert bg-success alert-success text-white" role="alert">
                 {{Session::get('message')}}
             </div>
         @endif
-    <div class="card">
-        <div class="card-header"><h3>Tabla Pistas</h3>
+    <div class="card bg2">
+        <div class="card-header bg2 "><h3 class="texto2 fs-4 fw-bold">Tabla Pistas</h3>
 
         </div>
-        <div class="card-body">
-            <table id="data_table" class="table">
+        <div class="card-body bg2 mt-0">
+            <table id="data_table" class="table bg">
                 <thead>
-                    <tr>
-                        <th>ID</th>  
-                        <th >Imagen</th>
-                        <th>Nombre</th>          
-                        <th>Tipo</th>
+                    <tr class="bg2">
+                        <th class="text-white">ID</th>  
+                        <th class="text-white" >Imagen</th>
+                        <th class="text-white">Nombre</th>          
+                        <th class="text-white">Tipo</th>
                         <th class="nosort">&nbsp;</th>
                         <th class="nosort">&nbsp;</th>
                         
@@ -57,13 +57,13 @@
                 <tbody>
                 @if(count($pistas)>0)
                     @foreach($pistas as $pista)
-                    <tr>
-                        <td>{{$pista->id}}</td>
+                    <tr >
+                        <td class="texto2 fs-5">{{$pista->id}}</td>
                        
-                        <td><img src="{{asset('images')}}/{{$pista->image}}" class="table-user-thumb" ></td>
-                        <td>{{$pista->name}}</td>
-                        <td>{{$pista->type}}</td>    
-                        <td>
+                        <td><img src="{{asset('images')}}/{{$pista->image}}"   style="width: 80px;  border-radius: 50%;" ></td>
+                        <td class="texto2 fs-5">{{$pista->name}}</td>
+                        <td class="texto2 fs-5">{{$pista->type}}</td>    
+                        <td class="texto2 fs-5">
                             <div class="table-actions">
                                 <a href="#" data-toggle="modal" data-target="#exampleModal{{$pista->id}}">
                                 <i class="ik ik-eye text-primary"></i>

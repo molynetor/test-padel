@@ -12,7 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/mdb.js') }}" defer></script>
+ 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://js.stripe.com/v3/"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -23,9 +23,20 @@
     <!--Bootstrap-->
     <script src="{{asset('template/plugins/bootstrap/dist/js/bootstrap.min.js')}}" defer></script>
 
+        <!-- AOS -->
+ <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <!--MDB Bootstrap-->
   <script src="{{asset('template/plugins/mdb/mdb.js')}}" defer></script>
   <link href="{{asset('template/plugins/mdb/mdb.css')}}"rel="stylesheet"></script>
+
+    <!--  Magnific Popup css file  -->
+    <link rel="stylesheet" href="{{asset('template/plugins/Magnific-Popup/dist/magnific-popup.css')}}">
+
+
+    <!--  Owl-carousel css file  -->
+    <link rel="stylesheet" href="{{asset('template/plugins/owl-carousel/css/owl.carousel.min.css')}}">
+   
 
 <!--Core JS-->
 <script src="{{asset('template/plugins/core/core.js')}}"></script>
@@ -38,7 +49,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app1.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/mdb.css') }}" rel="stylesheet">
+   
     <link rel="stylesheet" href="{{asset('template/dist/css/theme.min.css')}}">
 
 
@@ -50,16 +61,17 @@
 
 </head>
 
-<body>
+<body data-bs-spy="scroll" data-bs-target=".navbar" id="home">
     <div id="app">
         <header class="header">
             <!--navbar-->
             <nav class="navbar navbar-expand-sm scrolling-navbar navbar-dark fixed-top" data-aos="fade-down">
                 <div class="container">
-                    
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                    LOGO
+                   
+                    <a class="navbar-brand ms-5" href="{{ url('/') }}">
+                    LOGO YSTP              
                     </a>
+                  
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                          <span class="navbar-toggler-icon"></span>
                     </button>
@@ -73,11 +85,11 @@
                         <ul class="navbar-nav mx-auto align-items-center">
                             <li class="nav-item ">
 
-                                <a href="{{ url('/') }}" class="nav-link mx-4">Home</a>
+                                <a href="#home" class="nav-link mx-4">Inicio</a>
                             </li>
                             <li class="nav-item">
 
-                                <a href="#noticias" class="nav-link mx-4">Noticias</a>
+                                <a href="{{ route('home.blog') }}" class="nav-link mx-4">Noticias</a>
                             </li>
                             <li class="nav-item">
 
@@ -85,27 +97,29 @@
                             </li>
                             <li class="nav-item">
 
-                                <a href="#home" class="nav-link mx-4">Servicios</a>
+                                <a href="#galeria" class="nav-link mx-4">Galería</a>
                             </li>
                             <li class="nav-item">
 
-                                <a href="#home" class="nav-link mx-4">Contacto</a>
+                                <a href="#contacto" class="nav-link mx-4">Contacto</a>
                             </li>
 
-                            @if(auth()->check()&& auth()->user()->role->name === 'user')
+                            @if(auth()->check()&& auth()->user()->role->name === 'user' && auth()->user()->role->name ==='admin')
                             <li class="nav-item mx-4">
                                 <a class="nav-link" href="{{ route('my.booking') }}">{{ __('Mis Reservas') }}</a>
                             </li>
                             @endif
-                            <div class="dropdown dropdown-cart mx-2"> <a href="#" class="dropdown-toggle lnk-cart"
+                            <div class="dropdown dropdown-cart mx-2"> 
+                                <a href="#" class="dropdown-toggle lnk-cart"
                                     data-toggle="dropdown" id="mini">
-                                    <div class="items-cart-inner ">
+                                    <div class="items-cart-inner align-items-center">
                                         <div class="basket"> <i class="fas fa-shopping-cart text-white"></i></div>
                                         <div class="basket-item-count"><span class="count" id="cartQty"> </span></div>
-                                        <div class="total-price-basket"> <span class="lbl">Total -</span>
-                                            <span class="value" id="cartSubTotal"> </span> </span>
+                                        <div class="total-price-basket"> <span class="lbl">Total:</span>
+                                            <span class="value" id="cartSubTotal"></span> </span>
+                                            <span class="total-price"> <span class="sign">€</span>
                                         </div>
-                                        <span class="total-price"> <span class="sign">€</span>
+                                        
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu p-3">
@@ -121,12 +135,13 @@
 
                                         <div class="clearfix cart-total">
                                             <div class="pull-right"> <span class="text">Sub Total :</span>
-                                                <span class='price' id="cartSubTotal"> </span>
+                                                <span class='price' id="cartSubTotal"> </span>€
                                             </div>
                                             <div class="clearfix"></div>
-                                            <a href="{{ route('mycart') }}" type="submit"
-                                                class="btn btn-primary checkout-btn">PAGAR</a>
-                                            <!-- /.cart-total-->
+                                            <form action="{{ route('mycart') }}">
+                    <button type="submit" class="btn btn-outline-brand">PAGAR</button>
+                           </form>
+                                            
 
                                     </li>
                                 </ul>
@@ -141,7 +156,10 @@
 
                             @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class=" btn btn-outline-brand" href="{{ route('register') }}">Registrarse</a>
+                            <form action="{{ route('register') }}">
+                    <button type="submit" class="btn btn-outline-brand">Registrarse</button>
+                           </form>
+                           
                             </li>
                             @endif
                             @else
@@ -172,7 +190,7 @@
                                     <a style="color: #000; font-size:16px; font-weight: bold;" class="dropdown-item"
                                         href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Salir') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -186,20 +204,20 @@
                     </div>
                 </div>
             </nav>
-           
             @if(Session::has('message'))
-            <div class="alert alert-success text-end">
-                {{Session::get('message')}}
-            </div>
-            @endif
-            @if(Session::has('errmessage'))
-            <div class="alert alert-danger text-end">
-                {{Session::get('errmessage')}}
-            </div>
-            @endif
-
-         
+                <div class="alert alert-success text-end">
+                    {{Session::get('message')}}
+                </div>
+                @endif
+                @if(Session::has('errmessage'))
+                <div class="alert alert-danger text-end">
+                    {{Session::get('errmessage')}}
+                </div>
+                @endif
+            
         </header>
+        
+        
         <main>
     
             @yield('content')
@@ -207,7 +225,14 @@
 
     </div>
 
+  <!--  isotope js library  -->
+  <script src="{{asset('template/plugins/isotope/isotope.min.js')}}"></script>
 
+<!--  Magnific popup script file  -->
+<script src="{{asset('template/plugins/Magnific-Popup/dist/jquery.magnific-popup.min.js')}}"></script>
+
+<!--  Owl-carousel js file  -->
+<script src="{{asset('template/plugins/owl.carousel/js/owl.carousel.min.js')}}"></script>
 
 
     <script type="text/javascript"
@@ -237,7 +262,7 @@
                     <img src="{{asset('images')}}/${response.pistas[value.conditions-1].image}" class="table-user-thumb pista-mini my-3"></div>
             </div>
             <div class="col-xs-7">
-              <h3 class="name"><a href="index.php?page-detail">Hora ${value.name}</a></h3>
+              <h3 class="name">Hora ${value.name}</h3>
               <div class="price">Fecha: ${value.attributes}  </div>
               <div class="price">Pista: ${value.conditions} </div>
               <div class="price">Precio: ${value.price}€ </div>
@@ -301,7 +326,7 @@
             success: function(response) {
                 if (response.carts.length < 1) {
                     $('#pago').hide();
-                    $('#vacio').html(`<p class="fs-bold fs-4 text-primary">El Carrito está vacío</p>`);
+                    $('#vacio').html(`<p class="fs-bold fs-3 texto mt-3">El Carrito está vacío</p>`);
 
                 }
 
@@ -312,22 +337,22 @@
         <img src="{{asset('images')}}/${response.pistas[value.conditions-1].image}" class="table-user-thumb-2 pista" ></div>
         </td>
         <td>
-        <div class="price">Pista ${value.conditions} </div>
+        <div class="price texto2">Pista ${value.conditions} </div>
         </td>
         <td class="col-md-2">
-        <div class="product-name">${value.name}</div>
+        <div class="product-name texto2">${value.name}</div>
         </td>
         <td>
-        <div class="date"> 
+        <div class="date texto2"> 
             ${value.attributes}           
         </div> 
         </td>
           <td>
-          <div class="price">${value.price}€ </div>
+          <div class="price texto2">${value.price}€ </div>
           </td>   
 
         <td class="col-md-1 close-btn">
-        <button type="submit" class="" id="${value.id}" onclick="cartRemove(this.id)"><i class="fa fa-times"></i></button>
+        <button type="submit" class="" id="${value.id}" onclick="cartRemove(this.id)"><i class="fa fa-trash"></i></button>
         </td>
                 </tr>`
                 });
@@ -343,6 +368,7 @@
             url: '/cart-remove/' + id,
             dataType: 'json',
             success: function(data) {
+                couponCalculation();
                 cart();
                 miniCart();
                 $('#couponField').show();
@@ -423,18 +449,18 @@
 
                 if (data.total) {
                     $('#couponCalField').html(
-                        `<tr>
+                        `<tr class="bg">
                 <th>
                    
-                    <div class="cart-grand-total mt-3">
-                    <p class="fw-bold text-primary">Total a pagar <span class="inner-left-md fs-5"> ${data.total}€</span></p
+                    <div class="cart-grand-total mt-3 bg">
+                    <p class="titular fw-bold fs-4">TOTAL a pagar: <span class="inner-left-md  fw-bold fs-3"> ${data.total}€</span></p
                     </div>
                 </th>
             </tr>`
                     )
                 } else {
                     $('#couponCalField').html(
-                        `<tr>
+                        `<tr >
         <th>
             <div class="cart-sub-total">
                 Subtotal <span class="inner-left-md">${data.subtotal}€</span>
@@ -446,8 +472,8 @@
              <div class="cart-sub-total">
                 Descuento <span class="inner-left-md"> ${data.discount_amount}€</span>
             </div>
-            <div class="cart-grand-total fw-bold">
-               <p class="fw-bold text-primary">Total a pagar <span class="inner-left-md fs-5"> ${data.total_amount}€</span></p>
+            <div class="cart-grand-total fw-bold ">
+               <p class="fw-bold titular fs-4 mb-0">Total a pagar <span class="inner-left-md fw-bold fs-3"> ${data.total_amount}€</span></p>
             </div>
         </th>
             </tr>`
@@ -507,6 +533,7 @@
         });
     });
     </script>
+      
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <script type="text/javascript">
     $(function() {
@@ -583,27 +610,7 @@
 
     });
     </script>
-    <script>
-    let menu = document.querySelector('#menu-btn');
-    let navbar = document.querySelector('.header .nav');
-
-    menu.onclick = () => {
-        menu.classList.toggle('fa-times');
-        navbar.classList.toggle('active');
-        console.log(0a)
-    };
-
-    window.onscroll = () => {
-        menu.classList.remove('fa-times');
-        navbar.classList.remove('active');
-
-        if (window.scrollY > 0) {
-            document.querySelector('.header').classList.add('active');
-        } else {
-            document.querySelector('.header').classList.remove('active');
-        }
-    }
-    </script>
+    
 
     <style type="text/css">
     body {

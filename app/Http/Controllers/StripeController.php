@@ -20,9 +20,11 @@ class StripeController extends Controller
     
 
 if (Session::has('coupon')) {
+  $discount = Session::get('coupon')['discount_amount'];
   $total_amount = Session::get('coupon')['total_amount'];
 }else{
   $total_amount = round(Cart::getTotal());
+  $discount = 0;
 }
       $charge =  \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
       $data = \Stripe\Charge::create([
@@ -31,30 +33,30 @@ if (Session::has('coupon')) {
           "source"=>$request->stripeToken,
 	         'metadata' => ['order_id' => uniqid()],
       ]);
-      $order_id = Order::insertGetId([
-        'user_id' => Auth::id(),
-       
-        'name' => $request->name,
-        'email' => $request->email,
-        'phone_number' => $request->phone,
-        
-        'payment_type' => 'Stripe',
-        
-        'payment_method' => 'Stripe',
-        'payment_type' => $data->payment_method,
-        'transaction_id' => $data->balance_transaction,
-        'currency' => $data->currency,
-        'amount' => $total_amount,
-        'order_number' => $data->metadata->order_id,
- 
-        'invoice_no' => 'EOS'.mt_rand(10000000,99999999),
-        'order_date' => Carbon::now()->format('d F Y'),
-        'order_month' => Carbon::now()->format('F'),
-        'order_year' => Carbon::now()->format('Y'),
-        'status' => 'Pending',
-        'created_at' => Carbon::now(),	 
- 
-      ]);
+      
+        $order_id = Order::insertGetId([
+          'user_id' => Auth::id(),
+         
+          'name' => $request->name,
+          'email' => $request->email,
+          'phone_number' => $request->phone,         
+          'payment_type' => 'Stripe',
+          'payment_method' => 'Stripe',
+          'payment_type' => $data->payment_method,
+          'transaction_id' => $data->balance_transaction,
+          'currency' => $data->currency,
+          'amount' => $total_amount,
+          'discount'=>$discount,    
+          'order_number' => $data->metadata->order_id,
+          'invoice_no' => 'EOS'.mt_rand(10000000,99999999),
+          'order_date' => Carbon::now()->format('d F Y'),
+          'order_month' => Carbon::now()->format('F'),
+          'order_year' => Carbon::now()->format('Y'),
+          'status' => 'Pending',
+          'created_at' => Carbon::now(),	 
+   
+        ]);
+      
       
       $carts = Cart::getContent();
       
@@ -66,12 +68,12 @@ if (Session::has('coupon')) {
           'pista_id' => $cart->conditions,
           'time' => $cart->name,
           'date' =>  $cart->attributes[0],
+          'status' =>1,
           'price' => $cart->price,
           'created_at' => Carbon::now(),
           
         ]);
-        
-        
+         
       }
       
      
@@ -87,7 +89,7 @@ if (Session::has('coupon')) {
       Cart::clear();
  
       $notification = array(
-       'message' => 'Your Order Place Successfully',
+       'message' => 'Tu pedido se ha realizado con éxito',
        'alert-type' => 'success'
      );
  
@@ -108,9 +110,6 @@ if (Session::has('coupon')) {
         $horas_ac= Horas::where('id',$cart->id)
          ->where('time',$cart->name)
          ->update(['status'=>1]);
-
-
-
       }
       $invoice = Order::findOrFail($order_id);
      	$data = [
@@ -122,11 +121,9 @@ if (Session::has('coupon')) {
           'time' => $horas,
           'date' => $dias,
      	];
-     
-   
+       
      	Mail::to($request->email)->send(new MailBooking($data));
       
-  
     }
     public function checkBookingTimeInterval($fecha)
     {

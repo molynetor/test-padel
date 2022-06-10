@@ -12,6 +12,8 @@ use App\Http\Controllers\StripeController;
 use App\Http\Controllers\CashController;
 use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\UserListController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\WelcomeBlogController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,7 +45,6 @@ Route::group(['Middleware'=>['auth','user']],function(){
     Route::get('/invoice_download/{order_id}',[FrontendController::class, 'invoiceDownload']);
     Route::post('/perfil/store','App\Http\Controllers\PerfilController@store')->name('perfil.store');
     Route::post('/perfil-foto','App\Http\Controllers\PerfilController@perfilFoto')->name('perfil.foto');
-
     Route::post('/book/cita','App\Http\Controllers\FrontendController@store')->name('booking.cita');
     Route::get('/myBooking','App\Http\Controllers\FrontendController@myBookings')->name('my.booking');
 
@@ -108,13 +109,49 @@ Route::group(['Middleware'=>['auth','admin']],function(){
 
        
         Route::post('/search/by/month', [UserListController::class, 'ReportByMonth'])->name('search-by-month');
-        Route::post('/search/by/year', [UserListController::class, 'ReportByYear'])->name('search-by-year');
+        Route::post('/search/by/user', [UserListController::class, 'ReportByUser'])->name('search-by-user');
         
         });
 });
 
 
 
+Route::prefix('blog')->group(function(){
+
+    Route::get('/category', [BlogController::class, 'BlogCategory'])->name('blog.category');
     
+    Route::post('/store', [BlogController::class, 'BlogCategoryStore'])->name('blogcategory.store');
+
+    Route::get('/category/edit/{id}', [BlogController::class, 'BlogCategoryEdit'])->name('blog.category.edit');
+    Route::get('/category/delete/{id}', [BlogController::class, 'BlogCategoryDestroy'])->name('blog.category.delete');
+
+    Route::post('/update', [BlogController::class, 'BlogCategoryUpdate'])->name('blogcategory.update');  
+
+
+
+  
+
+    Route::get('/list/post', [BlogController::class, 'ListBlogPost'])->name('list.post');
+
+    Route::get('/add/post', [BlogController::class, 'AddBlogPost'])->name('add.post');
+
+    Route::post('/post/store', [BlogController::class, 'BlogPostStore'])->name('post-store');
     
- 
+});
+    
+Route::get('/blog', [WelcomeBlogController::class, 'AddBlogPost'])->name('home.blog');
+
+Route::get('/post/details/{id}', [WelcomeBlogController::class, 'DetailsBlogPost'])->name('post.details');
+
+Route::get('/blog/category/post/{category_id}', [WelcomeBlogController::class, 'HomeBlogCatPost']);
+
+Route::get('storage/{archivo}', function ($archivo) {
+    $public_path = public_path();
+    $url = $public_path.'/storage/app/public/'.$archivo;
+    if (Storage::exists($archivo))//verificamos si el archivo existe y lo retornamos
+    {
+      return response()->download($url);
+    }
+    abort(404);     //si no se encuentra lanzamos un error 404.
+
+});
