@@ -132,12 +132,14 @@ Route::prefix('blog')->group(function(){
   
 
     Route::get('/list/post', [BlogController::class, 'ListBlogPost'])->name('list.post');
-
     Route::get('/add/post', [BlogController::class, 'AddBlogPost'])->name('add.post');
-
     Route::post('/post/store', [BlogController::class, 'BlogPostStore'])->name('post-store');
+    Route::get('/post/edit/{id}', [BlogController::class, 'BlogPostEdit'])->name('blogpost.edit');
+    Route::get('/post/delete/{id}', [BlogController::class, 'BlogPostDestroy'])->name('blogpost.delete');
+    
     
 });
+Route::post('/update', [BlogController::class, 'BlogPostUpdate'])->name('post.update');  
     
 Route::get('/blog', [WelcomeBlogController::class, 'AddBlogPost'])->name('home.blog');
 

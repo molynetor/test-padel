@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $blogpost = BlogPost::latest()->get();
+        $blogpost = BlogPost::orderBy('id', 'ASC')->take(3)->get();
         if(Auth::user()->role->name == 'admin'){
 
             return redirect()->to('/dashboard');

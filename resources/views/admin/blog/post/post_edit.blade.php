@@ -14,7 +14,7 @@
         <!-- Basic Forms -->
         <div class="box">
             <div class="box-header with-border">
-                <h4 class="box-title">Añadir Post </h4>
+                <h4 class="box-title">Actualizar Post </h4>
 
             </div>
             <!-- /.box-header -->
@@ -22,12 +22,12 @@
                 <div class="row">
                     <div class="col">
 
-                        <form method="post" action="{{ route('post-store') }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('post.update') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="row">
                                 <div class="col-12">
-
+                                <input type="hidden" name="id" class="form-control" r value="{{ $blogpost->id}}">
 
 
 
@@ -42,7 +42,7 @@
                                                 <h5>Título del Post <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <input type="text" name="post_title" class="form-control"
-                                                        required="">
+                                                        required=""  value="{{ $blogpost->post_title}}">
                                                     @error('post_title')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -55,7 +55,7 @@
                                             <div class="form-group">
                                                 <h5>Fecha <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="text" name="date" class="form-control" required="">
+                                                    <input type="text" name="date" class="form-control" required="" value="{{ $blogpost->date}}">
                                                     @error('post_date')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -78,6 +78,7 @@
                                                                 href="http://" target="_blank"
                                                                 rel="noopener noreferrer"></a>
                                                         </option>
+                                                    
                                                         @foreach($blogcategory as $category)
                                                         <option value="{{ $category->id }}">
                                                             {{ $category->blog_category_name }}</option>
@@ -97,11 +98,14 @@
                                                 <h5>Imagén para el post <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <input type="file" name="post_image" class="form-control"
-                                                        onChange="mainThamUrl(this)" required="">
+                                                        onChange="mainThamUrl(this)" >
                                                     @error('post_image')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
-                                                    <img src="" id="mainThmb">
+                                                    @if(!$blogpost->image)
+                                                    <img src="{{asset('images')}}/{{$blogpost->post_image}}" class="mt-3" id="mainThmb" style="width: 120px; height: 100px;">
+                        
+                        @endif
                                                 </div>
                                             </div>
 
@@ -117,8 +121,8 @@
                                             <div class="form-group">
                                                 <h5>Detalles del post <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <textarea id="editor1" name="post_details" rows="10" cols="80"
-                                                        required=""> Descripción Completa
+                                                    <textarea class="text-dark" id="editor1" name="post_details" rows="10" cols="80"
+                                                        required=""> {{ $blogpost->post_details}}
 		
 						</textarea>
                                                 </div>
@@ -134,7 +138,7 @@
                                     <hr>
 
                                     <div class="text-xs-right">
-                                        <input type="submit" class="btn btn-brand mb-5" value="Añadir">
+                                        <input type="submit" class="btn btn-brand mb-5" value="Editar">
                                     </div>
                         </form>
 

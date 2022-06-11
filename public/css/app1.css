@@ -210,6 +210,8 @@ color: var(--bg1) !important;
       .courses .box-container .box .image img {
         height: 100%;
         width: 100%;
+        object-position: center;
+        -o-object-position: center;
         -o-object-fit: cover;
            object-fit: cover;
       }

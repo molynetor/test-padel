@@ -97,7 +97,7 @@ class BlogController extends Controller
   
 
   public function ListBlogPost(){
-    $blogpost = BlogPost::with('categorias')->latest()->get();
+    $blogpost = BlogPost::with('categorias')->orderBy('id', 'ASC')->get();
     return view('admin.blog.post.post_list',compact('blogpost'));
 }
 
@@ -121,11 +121,12 @@ public function BlogPostStore(Request $request){
         'post_title.required' => 'Titulo del post',
         
     ]);
+ $data = $request->all();
+            
+            $name = (new BlogPost)->userAvatar($request);
 
-    $image = $request->file('post_image');
-    $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-    Image::make($image)->resize(780,433)->save('images/'.$name_gen);
-    $save_url = 'images/'.$name_gen;
+            $data['post_image'] = $name;
+  
 
 BlogPost::insert([
     'category_id' => $request->category_id,
@@ -134,7 +135,7 @@ BlogPost::insert([
    
     'post_slug' => strtolower(str_replace(' ', '-',$request->post_title)),
    
-    'post_image' => $save_url,
+    'post_image' => $name,
     'post_details' => $request->post_details,
     'created_at' => Carbon::now(),
     
@@ -149,4 +150,54 @@ BlogPost::insert([
     return redirect()->route('list.post')->with($notification);
 
 } 
+public function BlogPostEdit($id){
+    $blogcategory = BlogPostCategory::latest()->get();
+    $blogpost = BlogPost::findOrFail($id);
+         return view('admin.blog.post.post_edit',compact('blogpost','blogcategory'));
+     }
+
+
+public function BlogPostUpdate(Request $request){
+
+   
+    $blogcategory = BlogPostCategory::latest()->get();
+    $blogpost = BlogPost::latest()->get();
+    $id = $request->id;
+
+    $data = $request->all();
+    $post = BlogPost::find($id);
+    $imageName = $post->post_image;
+    if($request->hasFile('post_image')){
+        $imageName =(new BlogPost)->userAvatar($request);
+        //borrar la imagen anterior
+        unlink(public_path('images/'.$post->post_image));
+       
+        
+    } 
+    $data['post_image'] = $imageName;
+     $post->update($data);
+ 
+
+     $notification = array(
+         'message' => 'Post actualizado',
+         'alert-type' => 'info'
+     );
+
+     return redirect()->route('list.post')->with($notification);
+
+ } 
+
+ public function BlogPostDestroy($id)
+ {
+    
+     /* if(auth()->user()->id == $id){
+         abort(401);
+    } */
+    $blog = BlogPost::find($id);
+    $blogDelete = $blog->delete();
+    if($blogDelete){
+     unlink(public_path('images/'.$blog->post_image));
+    }
+     return redirect()->route('list.post')->with('message','El post se ha borrado con exito');
+ }
 }

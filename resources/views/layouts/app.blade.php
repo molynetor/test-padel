@@ -204,7 +204,10 @@
                     </div>
                 </div>
             </nav>
-            @if(Session::has('message'))
+         
+            
+        </header>
+        @if(Session::has('message'))
                 <div class="alert alert-success text-end">
                     {{Session::get('message')}}
                 </div>
@@ -214,9 +217,6 @@
                     {{Session::get('errmessage')}}
                 </div>
                 @endif
-            
-        </header>
-        
         
         <main>
     

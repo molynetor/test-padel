@@ -37,7 +37,7 @@
             @foreach($blogpost as $blog)
             <div class="box " data-aos="fade-up">
                 <div class="image">
-                    <img src="{{ asset($blog->post_image) }}" alt="">
+                    <img src="{{asset('images')}}/{{$blog->post_image}}" alt="">
                 </div>
                 <div class="content">
                     <div class="icons">

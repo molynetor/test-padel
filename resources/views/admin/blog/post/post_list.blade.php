@@ -41,12 +41,12 @@
 	 <tr>
 
 		 <td>{{ $item->categorias->blog_category_name}}</td>
-		 <td> <img src="{{ asset($item->post_image) }}" style="width: 60px; height: 60px;"> </td>
+		 <td> <img src="{{asset('images')}}/{{$item->post_image}}" style="width: 60px; height: 60px;"> </td>
 		<td>{{ $item->post_title }}</td>
         <td>{{ $item->date }}</td>
 		<td width="20%">
- <a href="{{ route('blog.category.edit',$item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i> </a>
- <a href="" class="btn btn-danger" title="Delete Data" id="delete">
+ <a href="{{ route('blogpost.edit',$item->id) }}" class="btn " title="Edit Data"><i class="ik ik-edit-2 text-success"></i> </a>
+ <a href="{{ route('blogpost.delete',$item->id) }}" class="btn btn-danger" title="Delete Data" id="delete">
  	<i class="fa fa-trash"></i></a>
 		</td>
 

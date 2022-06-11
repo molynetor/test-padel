@@ -153,8 +153,8 @@
               <input type="hidden" name="festive" id="festive" :value="info.festive">
               <input type="hidden" name="price" id="price" :value="getPrecio(info.hora, info.dia, info.festive)">
 
-                                          <span data-i18n="table.ireedterm titular">Asegurate de leer los terminos de la reserva -></span>
-                                          <a data-i18n="table.hiring" class=" text-primary" target="_blank" href="storage/CONDICIONES.pdf">Política de reservas</a>
+                <span data-i18n="table.ireedterm titular">Asegurate de leer los terminos de la reserva -></span>
+              <a data-i18n="table.hiring" class=" text-primary" target="_blank" href="storage/CONDICIONES.pdf">Política de reservas</a>
                           
                                             
         	     <button type="submit" class="btn btn-outline-brand mb-2" @click="addToCart()" >Añadir al carrito</button>

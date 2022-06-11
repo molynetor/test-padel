@@ -18,7 +18,7 @@ class FrontendController extends Controller
 {
 public function index(){
     
-    $blogpost = BlogPost::latest()->get();
+    $blogpost = BlogPost::orderBy('id', 'ASC')->take(3)->get();
     if(request('date')){
     //comprobar que llega la fecha que buscamos
        // dd($this->findPistaOnDate(request('date')));
