@@ -134,7 +134,7 @@
                                                         </option>
                                                         @foreach($users as $user)
                                                         <option value="{{ $user->id }}">
-                                                            {{ $user->name }}</option>
+                                                            {{ $user->name }} {{$user->surname}} {{$user->phone_number}}</option>
                                                         @endforeach
                                                     </select>
                                                     @error('user_id')

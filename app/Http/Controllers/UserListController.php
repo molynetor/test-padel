@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class UserListController extends Controller
 {
     public function index(Request $request){
-         $users = User::latest()->get();
+         $users = User::orderBy('name', 'ASC')->get();
         $bookings = Booking::latest()->get();
         date_default_timezone_set('Europe/Madrid');
     	if($request->date){
@@ -32,7 +32,7 @@ class UserListController extends Controller
     }
     public function allReservas()
     {
-        $users = User::latest()->get();
+        $users = User::orderBy('name', 'ASC')->get();
         $bookings = Booking::latest()->paginate(20);
         $orders = Booking::latest()->paginate(20);
         return view('admin.userlist.index',compact('bookings','users'));
@@ -50,7 +50,7 @@ class UserListController extends Controller
     }   
     
     public function ReportByUser(Request $request){
-        $users = User::latest()->get();
+      $users = User::orderBy('name', 'ASC')->get();
         $bookings = Booking::where('user_id',$request->user_id)->get();
         
         
