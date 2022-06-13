@@ -7,6 +7,7 @@ use App\Models\Horas;
 use App\Models\User;
 use Datetime;
 use Illuminate\Http\Request;
+use DB;
 
 class UserListController extends Controller
 {
@@ -62,14 +63,17 @@ public function cancelStatus($id)
     //sin completar
     $booking  = Booking::find($id);
   
-    $hora = Horas::with('bookings','citas')
-    ->where('bookings.time','=','horas.time')
-    ->where('bookings.id','=',$id)
-    ->where('citas.id','=','horas.citas_id')
-    ->update(['horas.status'=>1]);
-    dd($hora);
-  
-    $booking->delete();
+    $hora = DB::select("SELECT h.id from citas c, bookings b , horas h
+    where c.date = b.date and
+    c.pista_id = b.pista_id AND
+    h.cita_id = c.id and
+    b.time = h.time AND
+    b.id = '$id. %'");
+ //$hora->update(['status'=>0]);
+ $times = Horas::where('id',$hora[0]->id)->update(['status'=>0]);
+
+ 
+ $booking->delete();
     
           
           return redirect()->back()->with('message','Su reserva se ha cancelado');
